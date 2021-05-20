@@ -44,40 +44,97 @@
 
 \section{Definitionen und Konstanten}
 \label{sec:definitionen-und-konstanten}
-\subsection{Periodendauer $T_p$}
-\label{sec:sub:periodendauer}
+
+\subsection{Funktionen}
+\label{sec:sub:funktionen}
+\subsubsection{sinc-Funktion $sinc(t)$}
+\label{sec:sub:sub:sinc-funktion}
+$$sinc(t) = \frac{\sin(t)}{t}$$
+\subsubsection{Sprungfunktion $\varepsilon(t)$}
+\label{sec:sub:sub:sprungfunktion}
+$$\varepsilon(t) := $$ \includegraphics[height=5cm]{Pictures/Heaviside.svg.png}
+\subsubsection{Zeitsignal $x(t)$}
+\label{sec:sub:sub:zeitsignal}
+$$x(t) := Zeitsignal$$
+\subsubsection{Frequenzspektrum $X(\omega)$}
+\label{sec:sub:sub:frequenzspektrum}
+$$X(\omega) := Frequenzspektrum $$
+\subsubsection{Abgetastetes Zeitsignal $x_A(t)$}
+\label{sec:sub:sub:abgetastetes-zeitsignal}
+$$x_A(t) := abgetastetes\ Zeitsignal$$
+\subsubsection{Abgetastetes Frequenzspektrum $X_A(\omega)$}
+\label{sec:sub:sub:abgetastetes-frequenzspektrum}
+$$X_A(\omega) := abgetastetes\ Frequenzspektrum $$
+
+\subsection{Analoge Signale}
+\label{sec:sub:const-def-analoge-signale}
+\subsubsection{Periodendauer $T_p$}
+\label{sec:sub:sub:periodendauer}
 $$ x(t) := \mathbb{R} \to \mathbb{R}$$
 $$T_p := x(t + n \cdot T_p) = x(t)$$
-\subsection{Frequenz $f$}
-\label{sec:sub:frequenz}
+\subsubsection{Frequenz $f$}
+\label{sec:sub:sub:frequenz}
 $$f = \frac{1}{T_p} = \frac{\omega_p}{2\pi}$$
-\subsection{Kreisfrequenz $\omega_p$}
-\label{sec:sub:kreisfrequenz}
+\subsubsection{Kreisfrequenz $\omega_p$}
+\label{sec:sub:sub:periodendauer-im-spektrum-kreisfrequenz}
 $$\omega_p = \frac{2\pi}{T_p}$$
-\subsection{sinc-Funktion $sinc(t)$}
-\label{sec:sub:sinc}
-$$sinc(t) = \frac{\sin(t)}{t}$$
-\subsection{Sprungfunktion $\varepsilon(t)$}
-\label{sec:sub:sprungfunktion}
-$$\varepsilon(t) := $$ \includegraphics[height=5cm]{Pictures/Heaviside.svg.png}
-\subsection{Zeitsignal $x(t)$}
-\label{sec:sub:zeitsignal}
-$$x(t) := Zeitsignal$$
-\subsection{Frequenzspektrum $X(\omega)$}
-\label{sec:sub:frequenzspektrum}
-$$X(\omega) := Frequenzspektrum $$
+
+\subsection{Diskrete Signale}
+\label{sec:sub:const-def-diskrete-signale}
+
 \subsection{Abtastfrequenz $f_A$}
 \label{sec:sub:abtastfrequenz}
 $$f_A = \frac{1}{\Delta T_A} = \frac{\omega_p}{2\pi}$$
-\subsection{Abgetastetes Zeitsignal $x_A(t)$}
-\label{sec:sub:abgetastetes-zeitsignal}
-$$x_A(t) := abgetastetes\ Zeitsignal$$
-\subsection{Abgetastetes Frequenzspektrum $X_A(\omega)$}
-\label{sec:sub:abgetastetes-frequenzspektrum}
-$$X_A(\omega) := abgetastetes\ Frequenzspektrum $$
-\subsection{Zeitspanne zwischen Abtastugnen }
-\label{sec:sub:zeitspanne-zwischen-abtastungen}
-$$\Delta T_A := Zeitspanne\ zwischen\ Abtastungen $$
+
+\subsubsection{Blocklänge $N$}
+\label{sec:sub:sub:blocklaenge}
+$$N :=$$ Anzahl an Stellen des diskreten Signals
+$$T_A \cdot \omega_P = 2\pi \cdot N$$ Das Produkt aus Periodendauern ist eine konstante Grösse, welche sich nur mit der Blocklänge N verändern lässt.\\
+$\to$ Unschärferelation der DFT (1. Variante)
+$$\Delta T_A \cdot \Delta \omega_P = \frac{2\pi}{N}$$ Das Produkt der Abtastabstände ist ebenso eine konstante Grösse, welche sich nur durch Blocklänge N verändern lässt.\\
+$\to$ Unschärferelation der DFT (2. Variante)
+
+\subsubsection{Zeitabstände $\Delta T_A$}
+\label{sec:sub:sub:delta-t-a}
+$$\Delta T_A :=$$ Zeitabstände der Abtastung im Zeitraum
+
+\subsubsection{Frequenzabstände $\Delta \omega_p$}
+\label{sec:sub:sub:delta-omega-p}
+$$\Delta \omega_p :=$$ Frequenzabstände der Abtastung im Frequenzspektrum \\
+$$\Delta \omega_P = \frac{2\pi}{T_A} \Rightarrow$$ Länge der Periode im Zeitraum legt Feinheit der Abstastung im Frequenzraum fest.
+
+\subsubsection{Periodendauer im Zeitraum $T_A$}
+\label{sec:sub:sub:t-a}
+$$T_A = N \cdot \Delta T_A :=$$ Periodendauer im Zeitraum $=$ Signaldauer
+
+\subsubsection{Periodendauer im Zeitraum $\omega_p$}
+\label{sec:sub:sub:omega-p}
+$$\omega_p = N \cdot \Delta \omega_P :=$$ Periodendauer im Frequenzraum $=$ max. Signalfrequenz\\
+$$\omega_p = \frac{2\pi}{\Delta T_A} \Rightarrow$$ Die Feinheit der Abtastung im Zeitraum legt die maximale angenommene Frequenz fest $\to$ Abtasttheorem!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 \newpage
 \section{Signale und Fouriertransformation}
@@ -100,7 +157,6 @@ a_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \cos(n\ome
 b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\omega_p t)\ dt
     \end{split}
 \end{equation}
-
 \noindent $a_n$ und $b_n$ dienen hierbei als Ähnlichkeitsmass wie sehr sich die Ursprungsfunktion $x(t)$ der jeweiligen Elementarfunktion $\big(sin(n\omega_p t)$ oder $cos(n\omega_p t)\big)$ ähnelt.\\
 
 \noindent \textbf{Bemerkungen:}
@@ -109,7 +165,6 @@ b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\ome
       \item Zur Berechnung der Fourierkoeffizienten lässt sich das Integrationsintervall verschieben z.B. zu $(0,T_p)$. \\
     \end{itemize} 
 
-     
     \noindent \textbf{Betrags-/Phasen-Darstellung der Fourierreihe:}
 \begin{equation}
     \label{eq:2}
@@ -119,7 +174,6 @@ b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\ome
   \varphi_n &= -\arctan\Big(\frac{b_n}{a_n}\Big)
       \end{split}
   \end{equation}
-
   \noindent Diese Darstellung lässt sich aus den Additionstheoremen von Sinus und Cosinus ableiten. \\
 
   \noindent \textbf{Komplexe Darstellung der Fourierreihe:}
@@ -130,14 +184,13 @@ b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\ome
     c_n &= \frac{1}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot e^{-jn\omega_p t}\ dt
     \end{split}
   \end{equation}
-
   \noindent Herleitung: \\
   Mit 
-  $$e^{j\omega t} := \cos(\omega t) + j\cdot \sin(\omega t)$$ erhält man $$\cos(\omega t) = \frac{1}{2}(e^{j\omega t} +  e^{-j\omega t})$$  \\
-  und daher:\\
-  $$\frac{A_0}{2} + \sum_{n=1}^{\infty} A_n \cdot \cos(n \omega_p t + \varphi_n) =  \sum_{n=0}^{\infty}c_n e^{jn\omega_p t} +  \sum_{n=1}^{\infty}c_{-n}e^{-jn\omega_p t}$$\\
-  $$c_n = \frac{A_n}{2} e^{j\varphi_n}$$\\
-  $$ c_{-n} = \frac{A_n}{2} e^{-j\varphi_n}$$ \\
+  $$e^{j\omega t} := \cos(\omega t) + j\cdot \sin(\omega t)$$ erhält man $$\cos(\omega t) = \frac{1}{2}(e^{j\omega t} +  e^{-j\omega t})$$ 
+  und daher:
+  $$\frac{A_0}{2} + \sum_{n=1}^{\infty} A_n \cdot \cos(n \omega_p t + \varphi_n) =  \sum_{n=0}^{\infty}c_n e^{jn\omega_p t} +  \sum_{n=1}^{\infty}c_{-n}e^{-jn\omega_p t}$$
+  $$c_n = \frac{A_n}{2} e^{j\varphi_n}$$
+  $$ c_{-n} = \frac{A_n}{2} e^{-j\varphi_n}$$ 
 
   \noindent \textbf{Umformungen:}\\
   \includegraphics[height=6cm]{Pictures/Umformung.png} \\
@@ -161,7 +214,6 @@ b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\ome
       x(t) &= \frac{1}{2\pi} \int_{-\infty}^{ \infty} X(\omega) \cdot e^{j \omega t}\ d \omega\ (ICTFT/IFT) \ (aus\ 6) 
       \end{split}
     \end{equation}
-
  \noindent   Herleitung:\\
   \noindent Wir definieren eine Hilfsvariable: $\omega_n = n\omega_p$, sodass gilt:
   $\omega_{n+1} - \omega_n = \omega_p = \frac{2\pi}{T_p}$ und beginnen mit:
@@ -170,7 +222,6 @@ b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\ome
   $$c_n := \frac{1}{T_p}\int_{-\frac{T_p}{2}}^{\frac{T_p}{2}}x(t) \cdot e^{-j \omega_n t}\ dt$$
 
   \noindent Wir definieren eine Funktion in Abhängigkeit von $\omega_n$:
-  
   \begin{equation}
   \label{eq:5}
     \begin{split}
@@ -180,7 +231,6 @@ b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\ome
   \end{equation}
 
   \noindent Das neu gewonnene $c_n$ wird nun als Koeffizient in die ursprüngliche komplexe Fourierreihe eingesetzt:
-
   \begin{equation}
     \label{eq:6}
       \begin{split}
@@ -189,7 +239,6 @@ b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\ome
       &= \frac{1}{2\pi} \sum_{n=-\infty}^{\infty} X(\omega_n) e^{j\omega_n t} \ (\omega_{n + 1} - \omega_n)  \\
       \end{split}
     \end{equation}
-
     \noindent Lässt man nun $T_p \to \infty$ gehen, wird $\omega_p$ immer kleiner und die Unterteilungen $\omega_n$ wandern dichter zueinander
     und im Grenzfall ein kontinuierlicher Verlauf $(\omega_ n \to \omega)$ und man erhält ein Riemann-Integral. Daraus folgert sich die oben aufgeführten Integrale für $x(t)$ und $X(\omega)$.\\
 
@@ -204,7 +253,6 @@ b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\ome
     \subsubsection{Einschub: Die kontinuierliche Faltung}
   \label{sec:sub:sub:faltung}
 
-    
   \begin{equation}
     \label{eq:7}
       \begin{split}
@@ -243,7 +291,6 @@ b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\ome
     &=x(t_0)
     \end{split}
     \end{equation}
-
     \noindent $x(t)$ wird überall ignoriert ausser an der Stelle an der $\delta(t-t_0) \neq 0$, d.h. bei $t = t_0$.\\
     Quasi eine Abtastung der Funktion $x(t)$ an Stelle $t_0$.\\
 
@@ -253,7 +300,7 @@ b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\ome
     Das Spektrum des Delta-Impulses enthält alle Frequenz mit Gewicht 1! \\
 
     \noindent \textbf{Die Stammfunktion des Delta-Impulses: $\varepsilon(t)$:}
-    $$\varepsilon (t) = \int_{-\infty}^{t} \delta(\tau)\ d \tau \Leftrightarrow  \frac{d}{dt} \varepsilon (t) = \delta (t) $$\\
+    $$\varepsilon (t) = \int_{-\infty}^{t} \delta(\tau)\ d \tau \Leftrightarrow  \frac{d}{dt} \varepsilon (t) = \delta (t) $$
 
      \noindent \textbf{Fouriertransformation der Sprungfunktion:}
      $$\varepsilon(t) \TransformHoriz \pi \cdot \delta(\omega) + \frac{1}{j\omega} $$
@@ -292,8 +339,40 @@ b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\ome
   \includegraphics[height = 7cm]{Pictures/Korrespondenz2.png}\\
   \includegraphics[height = 5cm]{Pictures/Korrespondenz3.png}
 
-  \newpage
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  \newpage
   \subsection{Diskrete Signale}
   \label{sec:sub:diskrete-signale}
 
@@ -307,7 +386,6 @@ Die Abtastung einer kontinuierlichen Funktion erfolgt mit einem Delta-Kamm:
     \label{eq:11}
       \sum_{n = -\infty}^{\infty} \delta (t-n\Delta T_A)
   \end{equation}
-
 \noindent Der Delta-Kamm stellt eine Schar einzelner Delta-Impulsen an bestimmten gewünschten Abtastungsorten mit gleichem Abstand voneinander dar: \\
 \includegraphics[height=5cm]{Pictures/DeltaKamm.png}
 
@@ -415,6 +493,94 @@ $\Rightarrow$ "Mindestens mit der doppelt so grossen Frequenz wie im Originalsig
   \end{equation} 
 
 
+  \subsubsection{DFT (diskrete, periodische Signale)}
+  \label{sec.sub:sub:dft}
+
+\noindent Der Sinn der DFT: Man will nicht nur das Signal auf einer digitalen Rechen- oder Speichereinheit verarbeiten, sondern auch das Spektrum. \\
+  Die Idee der DFT: \\
+    diskretes \& periodisches Zeitsignal $\TransformHoriz$ diskretes \& periodisches Spektrum \\
+\begin{equation}
+  \label{eq:18}
+  \begin{split}
+    X[m] = \sum_{n = 0}^{N-1} x[n]& e^{-j2\pi \frac{mn}{N}}\ (DFT) \\
+    x[n] = \frac{1}{N}\sum_{m = 0}^{N-1} &X[m] e^{j2\pi \frac{mn}{N}}\ (IDFT) \\
+    wobei& \\
+    x[n] := x&(n\Delta T_A) \\
+    X[m] := X&(m\Delta \omega_P)
+  \end{split}
+\end{equation}
+\noindent Es gilt für Zeitsignal und Frequenzspektrum in dieser Darstellung die gleiche Periode N, d.h. $X[m+N] = X[m]$ und $x[m +N] = x[n]$. \\
+
+\noindent  \textbf{Bemerkungen:}
+  \begin{itemize}
+    \item Man erhält für $N$ abgetastete Werte des Originalsignals automatisch auch $N$ Werte des Spektrums. 
+    \item Zusammenhang diskretes Zeit- und Spektralsignal:\\\includegraphics[height = 4cm]{Pictures/ZusammenhangN.png} 
+    \item $X[N-m] = \overline{X[m]}$ und damit auch $|X[N-m]| = |\overline{X[m]}| = |X[m]|$
+    \item Für ein reelles Signal x[n] ist das Betragsspektrum $|X[m]|$ immer symmetrich innerhalb einer Periode: $|X[m]| = |X[N-m]|$ für $m = 0,...,N-1$ \\
+  \end{itemize}
+
+ \noindent   Die Herleitung der DFT wird in 5. Schritten aufgeteilt: 
+ \begin{itemize}
+   \item Schritte 1-2: Erzeugen des diskreten und periodischen Zeitsignals für die DFT
+   \item Schritte 3-5: Zusammenhang zwischen dem diskreten und periodischen Zeitsignal mit seinem diskreten und periodischen Spektrum 
+   \item Der Zusammenhang wird durch folgende Argumentation erreicht: \\diskretes \& periodisches Zeitsignal $\TransformHoriz$ CTFT \{$\cdot$\} $\InversTransformHoriz$ ICTFT\{CTFT \{$\cdot$\}\}  
+ \end{itemize}
+
+ \noindent \\ 1. Schritt
+ \begin{itemize}
+   \item kontinuierliches Zeitsignal $x(t)$ im Intervall $[0, T_A]$ fenstern, so dass wesentliche Signalinformation enthalten ist.
+   \item gefensterte Signal künstlich periodisch fortsetzen und umbenennen zu $x_P (t)$.
+   \item Potentielle Fehler: Falsch abschneiden fürs zukünftige Periodisieren. \\$\to$ Leakage Fehler
+ \end{itemize}
+ 
+ \noindent \\ 2. Schritt
+ \begin{itemize}
+  \item Abtastung des periodischen Signals $x_P (t)$ wobei $N$ Abtastzeitpunkte im Grundintervall $[0, T_A]$ untergebracht werden. N wird als Blocklänge des diskreten Signals bezeichnet. 
+  \item Dadurch haben die Abtastzeitpunkte einen Abstand von $\Delta T_A := \frac{T_A}{N}$. D.h. wir betrachten das abgetastete Signal: $$x_P (t) \cdot \sum_{n = -\infty}^{\infty} \delta(t - n \Delta T_A)$$
+  \item Potentielle Fehler: Abtasttheorem verletzen.
+\end{itemize}
+\noindent\\ Grafik 1. und 2. Schritt:\\
+\includegraphics[height = 12cm]{Pictures/Schritt1.png}
+
+\noindent \\ 3. Schritt | Konkrete Herleitung erspart
+ \begin{itemize}
+  \item Fouriertransformation (CTFT) für das abgetastete Signal: \begin{equation}
+    \label{eq:19}
+    \begin{split}
+      & x_P (t) \cdot \sum_{n = -\infty}^{\infty} \delta(t - n \Delta T_A) \\
+      \TransformHoriz & \Bigg[ \frac{2\pi}{N \Delta T_A} \sum_{n = 0}^{N -1} x(n \Delta T_A) e^{- j n\Delta T_A \omega} \Bigg] \cdot \Bigg[\sum_{k = -\infty}^{\infty} \delta(\omega - k\Delta \omega_p) \Bigg]
+    \end{split}
+  \end{equation}
+  \item Es gilt im Grundintervall $[0, T_A]$, dass $x_p(n\Delta T_A) = x(n \Delta T_A)$.
+  \item Es gilt im Grundintervall, dass die Konstante $\Delta \omega_p := \frac{2\pi}{N \Delta T_A}$ eingeführt wird.
+  \item Wir stellen fest: Die Fouriertransformierte ist ein abgetastetes Signal mit Abtastorten $k\Delta\omega_p, k \in \mathbb{Z}$.
+\end{itemize}
+
+\noindent \\ 4. Schritt | Konkrete Herleitung erspart
+ \begin{itemize}
+  \item Inverse Fouriertransformation (ICTFT) auf das Spektrum, um wieder das Originalsignal an den Abtastorten zu erhalten: \begin{equation}
+    \label{eq:20}
+    \begin{split}
+      \InversTransformHoriz & \Bigg[ \frac{1}{N} \sum_{k = 0}^{N -1} \sum_{n = 0}^{N -1}  x(n \Delta T_A) e^{- j 2\pi \frac{k n}{N}}e^{j2\pi \frac{k}{N} \frac{t}{\Delta T_A}} \Bigg] \cdot \Bigg[\sum_{l = -\infty}^{\infty} \delta(\omega - l\Delta T_A) \Bigg]
+    \end{split}
+  \end{equation}
+  \item Die fordere eckige Klammer ist identisch zu $x_p(t)$.
+  \item Ist $t \in [0,T_A]$, ist die fordere eckige Klammer sogar identisch zu x(t).
+  \item Gilt auch für spezielle $t$: Für ein $t_0 \in [0,T_A] \Rightarrow x(t_0)$.
+\end{itemize}
+
+\noindent \\ 5. Schritt
+ \begin{itemize}
+  \item Die Erkenntnis von Schritt 4 für $t_0 = m\Delta T_A$ anwenden: 
+  \begin{equation}
+    \label{eq:21}
+    \begin{split}
+      x(m\Delta T_A) &= \frac{1}{N} \sum_{k = 0}^{N -1} \Bigg[ \sum_{n = 0}^{N -1}  x(n \Delta T_A) e^{- j 2\pi \frac{k n}{N}} \Bigg] e^{j2\pi \frac{km}{N} }
+    \end{split}
+  \end{equation}
+  \item Die eckige Klammer $ =: X(k\Delta \omega_P)$ (DFT)
+  \item Der ganze Ausdruck $ =:$ IDFT
+\end{itemize}
 
 
 
