@@ -1,2 +1,2 @@
 # Integraltransformation
-Notes for lecture "Integraltransformation"
+Notes for lecture "Integraltransformationen"
