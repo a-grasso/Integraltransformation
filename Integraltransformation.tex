@@ -78,6 +78,9 @@ $$f = \frac{1}{T_p} = \frac{\omega_p}{2\pi}$$
 \subsubsection{Kreisfrequenz $\omega_p$}
 \label{sec:sub:sub:periodendauer-im-spektrum-kreisfrequenz}
 $$\omega_p = \frac{2\pi}{T_p}$$
+\subsubsection{Bandbreite $B$}
+\label{sec:sub:sub:frequenz}
+$$B :=$$ höchste vorkommende Frequenz
 
 \subsection{Diskrete Signale}
 \label{sec:sub:const-def-diskrete-signale}
@@ -111,30 +114,6 @@ $$T_A = N \cdot \Delta T_A :=$$ Periodendauer im Zeitraum $=$ Signaldauer
 \label{sec:sub:sub:omega-p}
 $$\omega_p = N \cdot \Delta \omega_P :=$$ Periodendauer im Frequenzraum $=$ max. Signalfrequenz\\
 $$\omega_p = \frac{2\pi}{\Delta T_A} \Rightarrow$$ Die Feinheit der Abtastung im Zeitraum legt die maximale angenommene Frequenz fest $\to$ Abtasttheorem!
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 \newpage
 \section{Signale und Fouriertransformation}
@@ -171,7 +150,7 @@ b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\ome
     \begin{split}
     x(t) &=\frac{A_0}{2} + \sum_{n=1}^{\infty} A_n \cdot \cos(n \omega_p t + \varphi_n)  \\
   A_n &= \sqrt{a^2_n + b^2_n} \\
-  \varphi_n &= -\arctan\Big(\frac{b_n}{a_n}\Big)
+  \varphi_n &= -\arctan\bigg(\frac{b_n}{a_n}\bigg)
       \end{split}
   \end{equation}
   \noindent Diese Darstellung lässt sich aus den Additionstheoremen von Sinus und Cosinus ableiten. \\
@@ -339,39 +318,6 @@ b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\ome
   \includegraphics[height = 7cm]{Pictures/Korrespondenz2.png}\\
   \includegraphics[height = 5cm]{Pictures/Korrespondenz3.png}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   \newpage
   \subsection{Diskrete Signale}
   \label{sec:sub:diskrete-signale}
@@ -457,7 +403,7 @@ $\Rightarrow$ "Mindestens mit der doppelt so grossen Frequenz wie im Originalsig
   \begin{equation}
     \label{eq:15}
     \begin{split}
-     x(t) &:= \sum_{n=-\infty}^{\infty} x(n \Delta T_A) \cdot sinc\Big(\frac{\pi}{\Delta T_A}(t-n\Delta T_A)\Big)
+     x(t) &:= \sum_{n=-\infty}^{\infty} x(n \Delta T_A) \cdot sinc\bigg(\frac{\pi}{\Delta T_A}(t-n\Delta T_A)\bigg)
     \end{split}
   \end{equation} 
   $\Rightarrow$ "Man interpoliert die diskreten Punkten mit der $sinc$-Funktion." \\
@@ -475,8 +421,8 @@ $\Rightarrow$ "Mindestens mit der doppelt so grossen Frequenz wie im Originalsig
   \begin{equation}
     \label{eq:116}
     \begin{split}
-      X(\omega) &= X_A(\omega) \cdot \Delta T_A \cdot rect\Big(\frac{\omega}{\omega_P}\Big) \\
-      &= X_A(\omega) \cdot \Delta T_A \cdot rect\Big(\frac{\omega \Delta T_A}{2\pi}\Big)
+      X(\omega) &= X_A(\omega) \cdot \Delta T_A \cdot rect\bigg(\frac{\omega}{\omega_P}\bigg) \\
+      &= X_A(\omega) \cdot \Delta T_A \cdot rect\bigg(\frac{\omega \Delta T_A}{2\pi}\bigg)
     \end{split}
   \end{equation} 
 
@@ -485,10 +431,10 @@ $\Rightarrow$ "Mindestens mit der doppelt so grossen Frequenz wie im Originalsig
   \begin{equation}
     \label{eq:17}
     \begin{split}
-      X(\omega) &\TransformHoriz x_A(t) * sinc(\frac{t\pi}{\Delta T_A}) \\
-        &= \int_{-\infty}^{\infty}x(\tau) \cdot \sum_{n=-\infty}^{\infty} \delta(\tau - n\Delta T_A) \cdot sinc\Big(\frac{\pi}{\Delta T_A}(t-\tau)\Big)\ d\tau \\
-         &= \sum_{n=-\infty}^{\infty} \int_{-\infty}^{\infty}x(\tau) \cdot sinc\Big(\frac{\pi}{\Delta T_A}(t-\tau)\Big) \delta(\tau - n\Delta T_A)\ dt \tau \\
-         &= \sum_{n=-\infty}^{\infty} x(n \Delta T_A) \cdot sinc\Big(\frac{\pi}{\Delta T_A}(t-n\Delta T_A)\Big) = x(t) 
+      X(\omega) &\TransformHoriz x_A(t) * sinc\bigg(\frac{t\pi}{\Delta T_A}\bigg) \\
+        &= \int_{-\infty}^{\infty}x(\tau) \cdot \sum_{n=-\infty}^{\infty} \delta(\tau - n\Delta T_A) \cdot sinc\bigg(\frac{\pi}{\Delta T_A}(t-\tau)\bigg)\ d\tau \\
+         &= \sum_{n=-\infty}^{\infty} \int_{-\infty}^{\infty}x(\tau) \cdot sinc\bigg(\frac{\pi}{\Delta T_A}(t-\tau)\bigg) \delta(\tau - n\Delta T_A)\ dt \tau \\
+         &= \sum_{n=-\infty}^{\infty} x(n \Delta T_A) \cdot sinc\bigg(\frac{\pi}{\Delta T_A}(t-n\Delta T_A)\bigg) = x(t) 
         \end{split}
   \end{equation} 
 
@@ -583,10 +529,82 @@ $\Rightarrow$ "Mindestens mit der doppelt so grossen Frequenz wie im Originalsig
 \end{itemize}
 
 
+\subsubsection{Handlungsanweisung zur DFT}
+Dieser Abschnitt behandelt die konkrete Anwendung der DFT für z.B. eine Spektralanalyse oder digitale Filterung. \\
+Man beginnt mit einem realen, kontinuerlichen Signal und will auch nach der DFT und IDFT dort wieder ankommen. \\
 
+\noindent   Die Handlungsanweisung beinhaltet 7.Schritte:
+ \begin{itemize}
+   \item Schritte 1-3: Theoretischer Analog-Digital-Wandler.
+   \item Schritte 4-6: Untersuchung (= Spektralanalyse) und Veränderung (= Filterung) des Spektrums. 
+   \item Schritt 7: Theoretischer Digital-Analog-Wandler.
+ \end{itemize}
 
+ \noindent \\ \textbf{1. Schritt}
+ \begin{itemize}
+ \item Fenstern eines gegebenen kontinuierlichen Zeitsignal so passend, dass bei periodischer Fortsetzung keine künstliche plötzliche Störung des Signals auftritt.
+ \item Dadurch wird $T_A$ festgelegt.
+ \item Falsches fenstern führt zum Leakage Fehler \\(Sprünge im Zeitsignal $\to$ Falsche Frequenzen im Spektrum): \\\includegraphics[height=10cm]{Pictures/BSPSchritt1.png} 
+ \end{itemize}
 
+ \noindent \\ \textbf{2. Schritt}
+ \begin{itemize}
+  \item Bestimmen der Blocklänge $N$, sodass das Abtasttheorem nicht verletzt wird. D.h. für ein bandbegrenztes Signal mit Bandbreite B ergibt sich dies zu: $$N \geq 2\ B\cdot T_A$$
+  \item Hat man nun das beliebige $N$, kann man daraus die verwendete Abtastabstände bestimmen: $$ \Delta T_A = \frac{T_A}{N}$$
+  \item Verletzung des Abtasttheorems führt zu Aliasing-Effekt \\(Unterabtastung $\to$ Misinformation): verweis auf \ref{sec.sub:sub:abtasttheorem} \\
+ \end{itemize}
 
+ \noindent \\ \textbf{3. Schritt}
+ \begin{itemize}
+  \item Abtasten des Signals zu den Zeitpunkten $t = n \Delta T_A,\ n = 0, .., N-1$ und es ergeben sich die diskreten Signalwerte: $$x[n] = x(n\Delta T_A)$$
+ \end{itemize}
+
+ \noindent \\ \textbf{4. Schritt}
+ \begin{itemize}
+  \item DFT durchführen:$$ X[m] = \sum_{n=0}^{N-1} x[n] e^{-j 2\pi \frac{mn}{N}},\ m= 0,..,N-1$$ an den Abtastorten $\omega_m = m\Delta \omega_P = m\frac{2\pi}{T_A},\ m= 0,..,N-1$.
+ \end{itemize}
+
+ \noindent \\ \textbf{5. Schritt}
+ \begin{itemize}
+  \item Betrachten und/oder verändern des Spektrums. Da die Veränderung (Filterung) des Spektrums eine so zentrale Rolle in der digitalen Signalverarbeitung spielt, wird aus dem gegbenen Spektrum X[m] ein neues Spektrum Y[m] erzeugt, bspw. durch Multiplikation einer Gewichtsfunktion $G$: $$Y[m] := G \cdot X[m], m = 0,..,N-1$$
+ \end{itemize}
+
+ \noindent \\ \textbf{6. Schritt}
+ \begin{itemize}
+  \item IDFT durchführen, um das gefilterte, diskrete Zeitsignal zu erhalten: $$ y[n] = \frac{1}{N} \sum_{m=0}^{N-1} Y[m]e^{j2\pi\frac{mn}{N}},\ n = 0,..N-1$$
+  \item In vielen Anwendungen der digitalen Signalverarbeitung hört man hier auf, wenn man sich nicht für eine kontinuierliche Version des gefilterten Signals interessiert, sonst Rekonstruktion.
+ \end{itemize}
+
+ \noindent \\ \textbf{7. Schritt}
+ \begin{itemize}
+  \item An Schritt 6 anknüpfend kann man mit der Rekonstruktionsformel aus dem diskreten Signal die kontinuierliche, periodische Signalrekonstruktion bestimmen: $$y_p(t) = \sum_{n = -\infty}^{\infty} y[n] \cdot sinc \bigg(\frac{\pi}{\Delta T_A} ( t- n\Delta T_A)\bigg)$$
+  \item Praktisch kann die undendliche Summe durch eine endliche Summe angenähert werden.
+  \item Gute Annäherung: $$\sum_{n = -N+1}^{2N-2}$$
+ \end{itemize}
+
+ \noindent  \\ \textbf{Zero-Padding}
+ \begin{itemize}
+   \item Beliebtes Mittel bei gegebenen Abtastabständen $\Delta T_A$ eine feinere Abtastung des Spektrums zu erreichen ist das $zero-padding$: $x[n]$ mit Nullen füllen
+   \item Blocklänge $N$ und Signaldauer $T_A$ werden so künstlich vergrössert. 
+   \item $\Delta \omega_P$ wird so automatisch kleiner, d.h. feinere Frequenzabtastung.
+   \item Echt periodische Signale werden dadurch evtl. verfälscht: \\ \includegraphics[height =5cm]{Pictures/ZeroPadding.png} 
+ \end{itemize}
+
+ \noindent  \\ \textbf{Gewichtetes Fenstern}
+\\ Um dem Leakage-Effekt mit nur geringen Nebenwirkungen zu reduzieren, werden Gewichtsfunktionen auf das Zeitsignal angewandt, eine sog. gewichtete Fensterung.\\
+
+ \noindent Dies wird dadurch erreicht, dass man das Originalsignal mit einer Gewichtsfunktion mutlipliziert, 
+ bei der am Intervallrand (bei $0$ und $N-1$) die Zeitwerte zur Null gedrückt werden und andererseits kaum neue künstliche Frequenzen eingeführt werden, 
+ d.h. die Gewichtsfunktion dazwischen einen möglichst gleichmässigen Verlauf hat in dem das Originalsignal sinnvoll repräsentiert wird: 
+ $$x' [n] := w[n] \cdot x[n],\ for n = {0,..nN-1},$$ mit der Gewichtsfunktion $w[n]$.\\
+
+\noindent Hanning-Window:
+$$w[n] := 0.5 - 0.5 \cos\bigg(\frac{2\pi n}{N}\bigg)$$
+ Blackman-Window:
+$$w[n] := 0.42 - 0.5 \cos\bigg(\frac{2\pi n}{N}\bigg) + 0.08 \cos\bigg(\frac{4\pi n}{N}\bigg)$$ 
+
+ \noindent Beispiel: \\
+ \includegraphics[height=10cm]{Pictures/WeightedWindow.png}
 
 
 
