@@ -38,7 +38,7 @@
 \label{sec:verlauf-und-rahmen}
 \includegraphics[height=10cm]{Pictures/Verlauf.png}
 
-\section{Klassifizierung der Signale}
+\section{Klassifizierung von Signalen}
 \label{sec:klassifizierung}
 \includegraphics[height=2cm]{Pictures/Einheiten.png}
 
@@ -79,7 +79,7 @@ $$f = \frac{1}{T_p} = \frac{\omega_p}{2\pi}$$
 \label{sec:sub:sub:periodendauer-im-spektrum-kreisfrequenz}
 $$\omega_p = \frac{2\pi}{T_p}$$
 \subsubsection{Bandbreite $B$}
-\label{sec:sub:sub:frequenz}
+\label{sec:sub:sub:bandbreite}
 $$B :=$$ höchste vorkommende Frequenz
 
 \subsection{Diskrete Signale}
@@ -110,7 +110,7 @@ $$\Delta \omega_P = \frac{2\pi}{T_A} \Rightarrow$$ Länge der Periode im Zeitrau
 \label{sec:sub:sub:t-a}
 $$T_A = N \cdot \Delta T_A :=$$ Periodendauer im Zeitraum $=$ Signaldauer
 
-\subsubsection{Periodendauer im Zeitraum $\omega_p$}
+\subsubsection{Periodendauer im Frequenzspektrum $\omega_p$}
 \label{sec:sub:sub:omega-p}
 $$\omega_p = N \cdot \Delta \omega_P :=$$ Periodendauer im Frequenzraum $=$ max. Signalfrequenz\\
 $$\omega_p = \frac{2\pi}{\Delta T_A} \Rightarrow$$ Die Feinheit der Abtastung im Zeitraum legt die maximale angenommene Frequenz fest $\to$ Abtasttheorem!
@@ -606,17 +606,76 @@ $$w[n] := 0.42 - 0.5 \cos\bigg(\frac{2\pi n}{N}\bigg) + 0.08 \cos\bigg(\frac{4\p
  \noindent Beispiel: \\
  \includegraphics[height=10cm]{Pictures/WeightedWindow.png}
 
+ \subsubsection{Einschub: Die diskrete Faltung}
+  \label{sec:sub:sub:diskrete-faltung}
 
+  \noindent \textbf{Azyklische diskrete Faltung:}
+  \begin{equation}
+    \label{eq:22}
+      \begin{split}
+      y[n] := x_1[n] * x_2[n] &= \sum_{k=-\infty}^{\infty} x_1[k] \cdot x_2[n-k] \\
+      &= \sum_{k=-\infty}^{\infty} x_1 [n-k] \cdot x_2[k]
+      \end{split}
+    \end{equation}
 
+    \noindent \textbf{Zyklische diskrete Faltung:}
+  \begin{equation}
+    \label{eq:23}
+      \begin{split}
+      y[n] := x_P[n] * h[n] &= \sum_{k=0}^{N-1} x_p[n-k] \cdot h_p[k] \\
+      \end{split}
+    \end{equation}
+    Im Normalfalll wählt man die Funktionen $h[n]$ mit $h[n] = 0$ ausserhalb des Grundintervalls $[0, N-1]$, sodass die Periodisierung mit $h_p[n]$ einfach nur eine Wiederholung der Werte des Grundintervalls darstellt und $h_p[k]$ einfach mit $h[k]$ ersetzt werden kann. \\
 
+    \noindent  \textbf{Bemerkungen:}
+    \begin{itemize}
+      \item Mit der Einführung des diskreten Delta-Impulses $$ \delta [n] =  \begin{cases} 1 &, n = 0 \\ 0 &, n \neq 0 \end{cases} $$
+      gibt es analog zu der Faltung mit analogen Signalen die Neutralitätseigenschaft der Faltung: $$ x[n] * \delta [n-n_0] = x[n - n_0]$$
+      \item Wenn man mit der DFT arbeitet (und somit mit diskreten und periodischen Signalen) nimmt man die Periodisierung des Zeitsignals $x[n]$ in Kauf, um ein diskretes Spektrum $X[n]$ z uerhalten, 
+      jedoch schränkt man sich in der Betrachtung naturgemäss nur auf das Grundintervall $[0, N-1]$ ein und ignoriert die Periodizität 
+      von $x[n]$ ausserhalb dieses Grundintervalls. \\
+      Bei der diskreten Faltung eines solchen Signals kann jedoch sehr einfach ein Überpsrechen von benachbarten Perioden stattfinden, 
+      welches unerwünscht ist aber mit $zero-padding$ vermieden werden kann: \\ \includegraphics[height = 8cm, width = 15cm]{Pictures/DiskreteFaltung.png}
+    \end{itemize}
 
+    \noindent  Herleitung: \\
+    \noindent \underline{Azyklische diskrete Faltung $\to$ Zyklische diskrete Faltung} \\
+    \noindent Für die digitale Verarbeitung stört das $\infty$ in der Summe der Azyklischen diskreten Faltung. Sind die zu verarbeitenden Signale aber diskret und periodisch so ist möglich: \\
 
+    \noindent Betrachtet man das diskrete und periodische Signal $x_p[n]$ mit Periodendauer $N$, sowie ein allgemeines (nicht-periodisches) Signal $h[n]$. 
+    Für diesen Fall gilt mit der Definition der diskreten Faltung und der Aufteilung der Faltungssumme in Teilsummen: 
+    \begin{equation}
+      \label{eq:24}
+        \begin{split}
+        y[n] &:= x_P[n] * h[n] \\
+        y[n] &= \sum_{k=-\infty}^{\infty} x_P[n-k] \cdot h[k] \\
+        y[n] &= ... \sum_{k=-N}^{-1} x_P[n-k] \cdot h[k] +\\
+        &+ \sum_{k=0}^{N-1} x_P[n-k] \cdot h[k] + ...\\
+        \end{split}
+      \end{equation}
+      \noindent Bringt man die Summen über Indexverschiebung zu den gleichen Summengrenzen:
+      \begin{equation}
+        \label{eq:25}
+          \begin{split}
+          y[n] &= ... \sum_{k=0}^{N-1} x_P[n-k + N] \cdot h[k - N] + \\
+          &  +  \sum_{k=0}^{N-1} x_P[n-k] \cdot h[k] + ...\\
+          y[n] &= \sum_{k=0}^{N-1} \sum_{l = -\infty}^{\infty} x_p [n -k -l \cdot N] \cdot h[k + l\cdot N]
+          \end{split}
+        \end{equation}
+\noindent Einerseits gilt wegen der Periodizität $x_p[n-k -l\cdot N] = x_p[n-k]$ und somit
+$$y[n] = \sum_{k=0}^{N-1} x_p[n-k]\cdot \sum_{l=-\infty}^{\infty} h[k + l\cdot N]$$
+und andererseits, stellt 
+$$h_p [k] := \sum_{l=-\infty}^{\infty} h[k + l\cdot N]$$
+eine periodisierte Version von $h[k]$ dar mit $h_p[k + v\cdot N] = h_p[k]$ für alle $v \in \mathbb{Z}$.
 
+\noindent Mit dieser Definition ergibt sich die Faltung zu einer endlichen Summe bzw. zur zyklischen diskreten Faltung (verweis auf \ref{eq:23}).
 
+\subsubsection{Besonderheiten der DFT}
+  \label{sec:sub:sub:besonderheiten-dft}
 
+  \noindent \textbf{Eigenschaften der CTFT:}\\
+  \includegraphics[height = 8cm]{Pictures/EigenschaftenDFT.png}\\
+  \includegraphics[height = 4.5cm]{Pictures/EigenschaftenDFT2.png}\\
 
-
-
-
-
+  \newpage       
 \end{document}
