@@ -131,7 +131,7 @@ Jedes Signal $x(t)$ kann als unendliche Summe von überlagerten Sinus und Cosinu
 \begin{equation}
   \label{eq:1}
   \begin{split}
-  x(t) &=\frac{a_0}{2} \sum_{n=1}^{\infty}\big(a_n \cdot \cos(n \omega_p t) + b_n \cdot \sin(n \omega_p t)   \big)  \\
+  x(t) &=\frac{a_0}{2} + \sum_{n=1}^{\infty}\big(a_n \cdot \cos(n \omega_p t) + b_n \cdot \sin(n \omega_p t)   \big)  \\
 a_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \cos(n\omega_p t)\ dt \\
 b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\omega_p t)\ dt
     \end{split}
