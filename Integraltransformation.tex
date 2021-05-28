@@ -38,10 +38,6 @@
 \label{sec:verlauf-und-rahmen}
 \includegraphics[height=10cm]{Pictures/Verlauf.png}
 
-\section{Klassifizierung von Signalen}
-\label{sec:klassifizierung}
-\includegraphics[height=2cm]{Pictures/Einheiten.png}
-
 \section{Definitionen und Konstanten}
 \label{sec:definitionen-und-konstanten}
 
@@ -65,8 +61,13 @@ $$x_A(t) := abgetastetes\ Zeitsignal$$
 \subsubsection{Abgetastetes Frequenzspektrum $X_A(\omega)$}
 \label{sec:sub:sub:abgetastetes-frequenzspektrum}
 $$X_A(\omega) := abgetastetes\ Frequenzspektrum $$
+\subsubsection{Impulsantwort $h(t)$}
+\label{sec:sub:impulsantwort}
+Die Impulsantwort $h(t)$ eines LTI-Systems ist das Ausgangssignal, wenn man einen Delta-Impuls $x(t) := \delta(t)$ als Eingangssignal wählt:
+$$ \delta(t) \to h(t)$$
+"Man kann alles über ein System lernen wenn man einen Delta-Impuls hineingibt."
 
-\subsection{Analoge Signale}
+\subsection{Variablen von analogen Signalen}
 \label{sec:sub:const-def-analoge-signale}
 \subsubsection{Periodendauer $T_p$}
 \label{sec:sub:sub:periodendauer}
@@ -82,7 +83,7 @@ $$\omega_p = \frac{2\pi}{T_p}$$
 \label{sec:sub:sub:bandbreite}
 $$B :=$$ höchste vorkommende Frequenz
 
-\subsection{Diskrete Signale}
+\subsection{Variablen von diskreten Signalen}
 \label{sec:sub:const-def-diskrete-signale}
 
 \subsubsection{Abtastfrequenz $f_A$}
@@ -115,9 +116,23 @@ $$T_A = N \cdot \Delta T_A :=$$ Periodendauer im Zeitraum $=$ Signaldauer
 $$\omega_p = N \cdot \Delta \omega_P :=$$ Periodendauer im Frequenzraum $=$ max. Signalfrequenz\\
 $$\omega_p = \frac{2\pi}{\Delta T_A} \Rightarrow$$ Die Feinheit der Abtastung im Zeitraum legt die maximale angenommene Frequenz fest $\to$ Abtasttheorem!
 
+\subsection{Systeme}
+\label{sec:sub:systeme}
+
+\subsubsection{LTI-System}
+\label{sec:sub:lti-system}
+LTI-System $\widehat{=}$ lineares und zeitinvariantes System
+
+
 \newpage
 \section{Signale und Fouriertransformation}
 \label{sec:signale-und-fouriertransformation}
+
+
+\subsection{Klassifizierung von Signalen}
+\label{sec:sub:klassifizierung-von-signalen}
+\includegraphics[height=2cm]{Pictures/Einheiten.png}
+
 
 \subsection{Analoge Signale}
 \label{sec:sub:analoge-signale}
@@ -677,5 +692,155 @@ eine periodisierte Version von $h[k]$ dar mit $h_p[k + v\cdot N] = h_p[k]$ für 
   \includegraphics[height = 8cm]{Pictures/EigenschaftenDFT.png}\\
   \includegraphics[height = 4.5cm]{Pictures/EigenschaftenDFT2.png}\\
 
-  \newpage       
+  \newpage    
+  
+  \section{Systemtheorie}
+
+
+  \subsection{Klassifizierung von Systemen}
+  \label{sec:sub:klassifizierung-von-systemen}
+
+  \noindent Systeme transformieren Eingangssignale in Ausgangssignale. Die abstrakte mathematische Beschreibung dieses Vorgangs wird in der Systemtheorie behandelt. \\
+  Im Zentrum dieser Vorlesung stehen dabei sog. lineare und zeitinvariante Systeme. \\
+  \includegraphics[height=4cm]{Pictures/Systeme.png}
+
+   \noindent Formal wir der Übergang von einem Eingangssignal $x(t)$ zu einem Ausgangssignal $y(t)$ mit $$ x(t) \to y(t)$$ beschrieben, wobei in dem Pfeil $\to$ die gesamte Syste,information enthalten ist, wie man von $x(t)$ zu $y(t)$ gelangt. \\
+
+   \subsubsection{Linearität}
+   \label{sec:sub:sub:linearitaet}
+    Man nennt ien System linear wenn
+    \begin{itemize}
+      \item Additionsprinzip: Die Summe von zwei beliebigen Eingangssignalen $x_1(t) + x_2(t)$ zu der Summe der jeweiligen Ausgangssignale $y_1(t) + y_2(t)$ führt, d.h. 
+            $$x_1(t) \to y_1(t)\ und\ x_2(t)\to y_2(t) \Rightarrow x_1(t) + x_2(t) \to y_1(t) + y_2(t)$$ 
+      \item Verstärkungsprinzip: Die Verstärkung des Eingangssignal $kx(t)$ mit einem beliebigen reellen Verstärkungsfaktor $ k \in \mathbb{R}$ zu einer identischen Verstärkung des Ausgangssignals $y(t)$ führt, d.h.
+          $$ x(t) \to y(t) \Rightarrow k\cdot x(t) \to k\cdot y(t)$$ 
+    \end{itemize}
+\noindent Beispiele von linearen Systemen: $$ y(t) := \int x(t)\ dt \ und \ y(t) := \frac{d}{dt}x(t)$$
+\noindent Es gibt ebenfalls echt nichtlineare Systeme: $$y(t) := \big(x(t)\big)^2$$
+
+
+    \subsubsection{Zeitinvarianz}
+    \label{sec:sub:sub:zeitinvarianz}
+    Man nennt ein System zeitinvariant wenn 
+    \begin{itemize}
+      \item das Signal sich mit der Zeit selbst nicht ändert, d.h. für ein beliebiges zeitverschobenes Eingangssignaö $x(t-\tau)$ gilt, dass das Ausgangssignal genauso verschoben ist, d.h. 
+        $$ x(t) \to y(t) \Rightarrow x(t-\ tau) \to y(t - \tau)$$
+        \includegraphics[height=3cm]{Pictures/Zeitinvarianz.png}
+    \end{itemize}
+    \noindent Es gibt ebenfalls zeitvariante Systeme: $$y(t) := t\cdot x(t)$$
+
+    \subsubsection{Kausalität}
+    \label{sec:sub:sub:kausalitaet}
+    Man nennt ein System kausal wenn 
+    \begin{itemize}
+      \item für ein Eingangssignal $x(t)$, für das gilt x$(t) = 0$ für $t<0$ 
+      \item ein Ausgangssignal y(t) erhält, für das ebenso gilt, dass $y(t) = $ für $ t<0$. 
+    \end{itemize}
+    \noindent    In anderen Worten: Das System erzeugt frühestens ein Ausgangssignal wenn es auch ein Eingangssignal erhalten hat. \\
+
+    \subsubsection{BIBO-Stabilität}
+    \label{sec:sub:sub:bibo-stabilitaet}
+    Man nennt ein System BIBO-stabil wenn 
+    \begin{itemize}
+      \item ein beschränktes Eingangssignal $x(t)$ zu einem beschränkten Ausgangssignal führt, d.h. für $A, B \in \mathbb{R}$ gilt 
+          $$|x(t)| \leq A < \infty \Rightarrow |y(t)| \leq B < \infty$$
+          Das bedeutet insbesondere, dass das System das Eingangssignal nicht beliebig stark verändern kann.
+    \end{itemize}
+
+    \subsubsection{Erhaltung von Frequenzen beim Durchlaufen von LTI-Systemen}
+    \label{sec:sub:sub:erhalt-der-frequenzen}
+    \noindent Der wesentliche Aspekt ist: Was passiert mit den Frequenzen der Eingangssignalen beim Durchlaufen von Systemen? \\ 
+
+    \noindent Nur in ein LTI-System eingehende Frequenzen eines Eingangssignals können auch Teil des Ausgangssignals sein. \\
+    Insebsondere kann ein LTI-System keine neuen Frequenzen erzeugen, die nicht schon Teil des Eingangssignals waren.\\
+
+    \noindent Natürlich werden die Frequenzen des Eingangssignals typischerweise durch den Systemdurchlauf im Ausgangssignal anders gewichtet sein. \\
+
+    \noindent Beweis: \\
+    \includegraphics[height=8cm]{Pictures/Beweis.png} \\
+    \includegraphics[height=6cm]{Pictures/Beweis2.png}
+
+    \subsubsection{Beispielsysteme: Grundarten von Filtern}
+    \label{sec:sub:sub:grundarten-filter}
+    Filter sind Systeme, die die Gewichtung von Frequenzen in Eingangssignalen bewusst verändern, um modifizierte Ausgangssignale zu erzeugen. \\
+
+    \noindent Es gibt vier Grundarten zur Manipulation der Frequenzen:\\
+    \includegraphics[height=7cm,width=13cm]{Pictures/Filter.png} \\
+    \noindent Genau solch dargestellte ideale Filterarten können praktisch nicht direkt realisiert werden, sondern werden nur angenähert.
+    \begin{itemize}
+      \item Die Hoch- und Null-Plateaus der Filter können nicht exakt konstant gehalten werden. 
+      \item Die exakten Sprungstellen in den Frequenzen würden zu unendlichen ausgebreiteten Signalen im Zeitraum 
+      (d.h. in positive und negative Zeitrichtung) führen, 
+      was in kausalen (also realisierbaren) Systemen nicht möglich ist \\
+      (Fourierkorrespondenz sinc-Funktion - Reckteckpuls)\\
+    \end{itemize}
+
+    \noindent \textbf{Tiefpassfilter:}\\
+    Entfernen von hochfrequentem Rauschen von einem empfangenen Signal, oder um ein Eingangssignal vor einer Abtastung bandbegrenzt zu machen.\\
+    \noindent \textbf{Hochpassfilter:}\\ 
+    Kantenfindung in Signal, oder in Equalizern in der Musik zur Schwächung niedriger Frequenzen.\\
+    \noindent \textbf{Bandpassfilter:}\\
+    Zur Selektion gewisser Frequenzbänder, bspw. zur Auftrennung in verschiedene Frequenzkanäle in der Akustuk (bspw. FM-Radio) oder Farbfilter in der Optik. \\
+    \noindent \textbf{Bandsperre:}\\
+    Abschwächung von Mittenfrequenzen bei einem Equalizer in der Akustik. 
+
+    \subsection{Impuls- und Schrittantwort}
+    \label{sec:sub:impuls-und-schrittantwort}
+
+    \subsubsection{Impulsantwort}
+    \label{sec:sub:sub:impulsantwort}
+
+    Wir definieren eine Funktion, nähmlich die Impulsantwort $h(t)$, welche das Ausgangssignal eines LTI-Systems ist, wenn man einen Delta-Impuls $x(t) := \delta(t)$ als Eingangssignal wählt. Man schreibt: 
+    $$\delta(t) \to h(t)$$
+
+    \noindent Es gilt:
+    \begin{itemize}
+    \item Aufgrund des Verstärkungsprinzip von linearen Systemen: \begin{equation}\label{eq:26} x(t) \cdot \delta(t) = x(0) \cdot \delta(t) \to x(0) \cdot h(t) \end{equation} 
+    \item Nach dem Verschiebungssatz des Delta-Impulses und der Zeitinvarianz des Systems: \begin{equation}\label{eq:27} x(\tau) \cdot \delta(t-\tau) \to x(\tau) \cdot h(t-\tau) \end{equation}
+    \item Integriert man dieses Signal nun (die Integration is eine lineare Operation) ergibt sich: $$\int_{-\infty}^{\infty} x(\tau) \cdot \delta(t-\tau)\ d\tau\ \to\ \int_{-\infty}^{\infty} x(\tau) \cdot h(t-\tau)\ d\tau$$
+    Es folgt: \begin{equation}\label{eq:28} x(t) \to x(t) * h(t) =: y(t)\end{equation} 
+    1. Egal welches $x(t)$ eingesetz wird, kennt man die Impulsantwort $h(t)$.\\
+    2. Das Ausgangssignal $y(t)$ kann man berechnen, indem man das Eingangssignal $x(t)$ mit der Impulsantwort $h(t)$ faltet.\\
+    3. Ist die Impulsantwort bekannt, kann man für jedes beliebige Eingangssignal $x(t)$ das Ausgangssignal $y(t)$ berechnen.\\
+    \end{itemize}
+
+    \noindent \textbf{Verbindung mit kausalen Systemen:} \\
+    \noindent Ein kausales LTI-System hat eine Impulsantwort für die gilt $h(t) = 0$ für $t <0$. \\
+
+    \noindent \textbf{Verbindung mit stabilen Systemen:} \\
+    \noindent Durch die Berechenbarkeit von Ausgangssignalen bei LTI-Systemen, kann die BIBO-Stabilität für diesen Fall konkretisiert werden. 
+    Es muss gelten, dass für ein beschränktes Eingangssignal $|x(t)| \leq A$ ein beschränktes Ausgangssignal $|y(t)| \leq B$ erhalten wird. 
+    Unter Verwendung der Dreiecksungleichung für Integrale gilt:
+    \begin{equation}\label{eq:29}|y(t)| = | x(t) * h(t)| = \bigg| \int_{-\infty}^{\infty}x(\tau)\cdot h(t- \tau)\ d \tau \bigg| \leq \int_{-\infty}^{\infty}|x(\tau)|\cdot |h(t- \tau)| \ d \tau \end{equation}
+    Setzt man nun den konstanten Maximalwert $A$ für $|x(t)|$ ein, so ergibt sich daraus
+    $$|y(t)| \leq A \cdot \int_{-\infty}^{\infty} |h(t-\tau)|\ d\tau$$
+    was ja kleiner als $\infty$ sein muss und damit:\\
+
+    Ein BIBO-stabiles LTI-System hat eine Impulsantwort für die gilt:
+    \begin{equation}
+      \label{eq:30}
+      \int_{-\infty}^{\infty} |h(t)|\ dt < \infty
+    \end{equation}
+    \indent d.h. das Integral über den Absolutbetrag der Impulantwort hat einen endlichen Wert.
+
+    \subsubsection{Schrittantwort}
+    \label{sec:sub:sub:schrittantwort}
+
+    \noindent    Der Delta-Impuls ist nur mühsam anzunähern. Es stellt sich heraus, dass die enge Verbindung der Sprung- bzw. Heavyside-Funktion $\varepsilon(t)$ mit dem Delta-Impuls $\delta(t)$ hier enorme praktische Vorteile.
+    Mit
+    $$ \frac{d}{dt}\varepsilon(t) = \delta (t)\ \ bzw.\ \ \varepsilon(t) = \int_{\infty}^{t} \delta(\tau)\ d\tau$$
+    Da wir kausale LTI-Systeme betrachten (und somit das Additionsprinzip mit der Integration gültig ist) und wir die Werte für $t<0$ vernachlässigen können, erhalten wir daraus
+    \begin{equation}\label{eq:31} \varepsilon(t) \to g(t) := \int_{0}^{t}h(\tau)\ d\tau\end{equation}
+    mit der Impulsantwort $h(t)$ und der sog. Schrittantwort $g(t)$.
+
+
+
+
+  \subsection{Analoge LTI-Systeme}
+  \label{sec:sub:analoge-lti-systeme}
+
+  \subsection{Diskrete LTI-Systeme}
+  \label{sec:sub:diskrete-lti-systeme}
+  
+
 \end{document}
