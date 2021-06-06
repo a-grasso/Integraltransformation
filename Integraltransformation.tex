@@ -833,11 +833,92 @@ eine periodisierte Version von $h[k]$ dar mit $h_p[k + v\cdot N] = h_p[k]$ für 
     \begin{equation}\label{eq:31} \varepsilon(t) \to g(t) := \int_{0}^{t}h(\tau)\ d\tau\end{equation}
     mit der Impulsantwort $h(t)$ und der sog. Schrittantwort $g(t)$.
 
-
-
-
   \subsection{Analoge LTI-Systeme}
   \label{sec:sub:analoge-lti-systeme}
+  Typische Beispiele sind elektronische Schaltungen als analoge (d.h. zeitkontinuierliche) LTI-Systeme, 
+  welche aus in Reihe oder parallel geschalteten passiven Bauelementen, wie Widerständen, Spulen und Kondensatoren aufgebaut sind. \\
+
+  \subsubsection{Grundregeln analoger LTI-Systeme}
+  \label{sec:sub:sub:grundregeln-analoger-lti-systeme}
+  \noindent Es gelten für diese elementaren Bauteile folgende bekanten Grundregeln zwischen Stromfluss $i(t)$ und Spannungsabfall $u(t)$:
+  \begin{itemize}
+    \item Ohm'sches Gesetz - Widerstand $R$ $$ u(t) = R\cdot i(t)$$
+    \item Kondensator mit Kapazität $C$ $$u(t) = \frac{1}{C}\int_{\-infty}^{t} i(\tau)\ d\tau$$
+    \item Spule mit Induktivität $L$ $$u(t) = L\frac{d}{dt}i(t)$$
+  \end{itemize}
+
+  \noindent sowie die Grundregeln der Verknüpfung dieser Bauelemente in Schaltungen mit Hilfe der Kirchoff'schen Regeln:
+  \begin{itemize}
+    \item Knotenregel für alle $n$ Ströme die durch einen Knoten fliessen $$ \sum_{k=1}^{n}i_k(t) = 0$$ 
+    \item Maschenregel für alle $n$ Spannungsabfälle in einer Masche  $$ \sum_{k=1}^{n}u_k(t) = 0$$
+  \end{itemize}
+  \noindent  Beispiel Maschenregel (Grün):\\
+  \includegraphics[height=5cm]{Pictures/PhysikRegeln.png}
+
+  \subsubsection{Darstellung analoger elektronischer Schaltungen als Differentialgleichungen}
+  \label{sec:sub:sub:elek-schaltungen-diff}
+
+  Im Folgenden betrachten wir detailliert das obige Beispiel. Aus der linken und rechten Masche ergeben sich nach der Maschenregel:
+  $$ u_E(t) - u_C(t)-u_R(t) = 0 $$
+  $$ u_A(t)-u_C(t) = 0$$
+
+  \noindent Löst man nach $u_E(t)$ bzw. nach $u_A(t)$ auf und setzt die bekannte Gleichung für die Spannung ein, so ergibt sich
+  $$ u_E(t) = \frac{1}{C} \int_{-\infty}^{t} i(\tau)\ d\tau + Ri(t)$$
+  $$ u_A(t) = \frac{1}{C} \int_{-\infty}^{t} i(\tau)\ d\tau$$
+
+  \noindent Da uns der Zusammenhang zwischen Eingangsspannung $u_E(t)$  und Ausgangsspannung $u_A(t)$ interessiert, müssen wir $i(t)$ ersetzen mit Hilfe der Umformung der letzten Gleichungen zu 
+  $$ i(t) = C\frac{d}{dt}u_A(t)$$
+  ergibt sich die Differentialgleichung
+  $$ u_E(t) = u_A(t) + RC\frac{d}{dt}u_A(t)$$
+  und in der bisherigen Notation
+  $$ y(t) + RC\frac{d}{dt}y(t) = x(t)$$
+  oder auch
+  $$ y(t) + RC\dot{y}(t) = x(t)$$ 
+
+  \noindent \\ Im Allgemeinen ergeben sich für solche elektronsichen Schaltungen (egal wie komplex) immer folgende Form von linearen Differentialgleichungen
+  \begin{equation}
+    \label{eq:32}
+     a_0y(t) + a_1\dot{y}(t) + a_2 \ddot{y}(t)+  ... =  b_0x(t) + b_1\dot{x}(t) + b_2 \ddot{x}(t)+...
+  \end{equation}
+  mit konstanten $a_k, b_k \in \mathbb{R}$. Das Lösen dieser Gleichung erfolgt mit der Laplace-Transformation. \\
+
+  \noindent Es gilt:\\
+  Systeme die durch den Zusammenhang zwischen Eingangssignal und Ausgangssignal mit Hilfe linearer Differentialgleichungen mit konstanten Koeffizietnen beschrieben werden können, sind automatisch LTI-Systeme.
+
+  \subsubsection{Laplace-Transformation}
+  \label{sec:sub:sub:laplace}
+
+  LT = Laplace-Transformation. Bisher haben wir die Fouriertransformation in drei versch. 
+  Fromen kennengelernt, CTFT für analoge Signale, DTFT für abgetastete Signale und DFT/FFT für abgetastete, periodische Signale. \\
+
+  \noindent Für die Untersuchung von analogen Systemen, wird eine echte Erweiterung der CTFT eingeführt, die sog. Laplace-Transformation:
+  \begin{equation}
+    \label{eq:33}
+    X_{LT}(s) := \int_{0^-}^{\infty} x(t) e^{-st}\ dt\ \ (LT)
+  \end{equation}
+  für echt komplexe Zahlen $s \in \mathbb{C}$ und wird auch die einseitige Laplace-Transformation genannt. \\
+
+  \noindent \textbf{Bemerkungen:}
+  \begin{itemize}
+    \item Man erhält für jede komplexe Zahl $s \in \mathbb{C}$ aus der komplexen Zahlenebene einen komplexen Wert $X_{LT}(s)$. Das tiefgestellte $LT$ soll hierbei den Unterschied zwischen Fouriertransformation und Laplace-Transformation verdeutlichen.
+    \item Man schreibt ebenso wie bei der Fouriertransformation $x(t) \TransformHoriz X_{LT}(s)$, und spricht davon, dass $x(t)$ im Zeitbereich und $X_{LT}(s) $ im Bildbereich liegt.
+    \item $0^-$ steht für die kleinstmögliche negative Zahl. Da wir kausale Systeme betrachten, kann das Integral nicht bei $-\infty$ beginnen. 
+    \item Zusammenhang zur Fouriertransformation: \\ \includegraphics[height=4cm]{Pictures/ZusammenhangLT.png}
+  \end{itemize} 
+
+  \noindent Anschauliches Bild der Laplace-Transformation: \\
+  \includegraphics[height=7cm]{Pictures/LT.png}
+
+
+
+
+
+
+
+
+
+
+
 
   \subsection{Diskrete LTI-Systeme}
   \label{sec:sub:diskrete-lti-systeme}
