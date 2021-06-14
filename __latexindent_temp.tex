@@ -708,7 +708,7 @@ eine periodisierte Version von $h[k]$ dar mit $h_p[k + v\cdot N] = h_p[k]$ für 
 
    \subsubsection{Linearität}
    \label{sec:sub:sub:linearitaet}
-    Man nennt ien System linear wenn
+    Man nennt ein System linear wenn
     \begin{itemize}
       \item Additionsprinzip: Die Summe von zwei beliebigen Eingangssignalen $x_1(t) + x_2(t)$ zu der Summe der jeweiligen Ausgangssignale $y_1(t) + y_2(t)$ führt, d.h. 
             $$x_1(t) \to y_1(t)\ und\ x_2(t)\to y_2(t) \Rightarrow x_1(t) + x_2(t) \to y_1(t) + y_2(t)$$ 
@@ -843,7 +843,7 @@ eine periodisierte Version von $h[k]$ dar mit $h_p[k + v\cdot N] = h_p[k]$ für 
   \noindent Es gelten für diese elementaren Bauteile folgende bekanten Grundregeln zwischen Stromfluss $i(t)$ und Spannungsabfall $u(t)$:
   \begin{itemize}
     \item Ohm'sches Gesetz - Widerstand $R$ $$ u(t) = R\cdot i(t)$$
-    \item Kondensator mit Kapazität $C$ $$u(t) = \frac{1}{C}\int_{\-infty}^{t} i(\tau)\ d\tau$$
+    \item Kondensator mit Kapazität $C$ $$u(t) = \frac{1}{C}\int_{-\infty}^{t} i(\tau)\ d\tau$$
     \item Spule mit Induktivität $L$ $$u(t) = L\frac{d}{dt}i(t)$$
   \end{itemize}
 
@@ -903,18 +903,144 @@ eine periodisierte Version von $h[k]$ dar mit $h_p[k + v\cdot N] = h_p[k]$ für 
     \item Man erhält für jede komplexe Zahl $s \in \mathbb{C}$ aus der komplexen Zahlenebene einen komplexen Wert $X_{LT}(s)$. Das tiefgestellte $LT$ soll hierbei den Unterschied zwischen Fouriertransformation und Laplace-Transformation verdeutlichen.
     \item Man schreibt ebenso wie bei der Fouriertransformation $x(t) \TransformHoriz X_{LT}(s)$, und spricht davon, dass $x(t)$ im Zeitbereich und $X_{LT}(s) $ im Bildbereich liegt.
     \item $0^-$ steht für die kleinstmögliche negative Zahl. Da wir kausale Systeme betrachten, kann das Integral nicht bei $-\infty$ beginnen. 
-    \item Zusammenhang zur Fouriertransformation: \\ \includegraphics[height=4cm]{Pictures/ZusammenhangLT.png}
+    \item Zusammenhang zur Fouriertransformation: \\ \includegraphics[height=5cm]{Pictures/ZusammenhangLT.png}
   \end{itemize} 
 
   \noindent Anschauliches Bild der Laplace-Transformation: \\
-  \includegraphics[height=7cm]{Pictures/LT.png}
+  \includegraphics[height=5cm]{Pictures/LT.png}
+  \includegraphics[height=7cm]{Pictures/LT2.png}
 
+  \subsubsection{Besonderheiten der Laplace-Transformation}
+  \label{sec:sub:sub:besonderheiten-laplace}
 
+  \noindent \textbf{Eigenschaften der Laplace-Transformation:}\\
+  \noindent Aufgrund der Nähe zur CTFT, hat die Laplace-Transformation sehr ähnliche Eigenschaften wie die CTFT (man muss meinst nur $j\omega$ mit $s$ ersetzen).\\
+  \includegraphics[height=8cm]{Pictures/EigenschaftLT.png}\\
+  \includegraphics[height=9cm]{Pictures/EigenschaftLT2.png} \\
 
+  \noindent \textbf{Korrespondenzen der Laplace-Transformation:} \\
+  \includegraphics[height = 9cm]{Pictures/KorrespondenzLT.png}\\
+  \includegraphics[height = 8cm]{Pictures/KorrespondenzLT2.png}
 
+  \subsubsection{Übertragungsfunktion und Frequenzgang}
+  \label{sec:sub:sub:uebertragungsfunktion-und-frequenzgang}
 
+  \noindent Mit Hilfe von Laplace-Transformation, Linearität, Differentiation und Faltung, kann man die lineare Differentialgleichung mit konstanten Koeffizienten sehr einfach transformieren. 
+  Es sei ein System wie folgt beschrieben:
+  $$ a_0 y(t) + a_1\dot{y}(t) + a_2\ddot{y}(t)+... = b_0 x(t) + b_1\dot{x}(t) + b_2\ddot{x}(t)+...$$
+  mit konstanten Koeffizienten $a_k, b_k \in \mathbb{R}$ und dem Eingangssignal $x(t)$ und dem Ausgangssignal $y(t)$ (für das gilt: $y(t) = 0$ für $t<0$) \\
+  Mit Anwendung der Laplace-Transformation auf beiden Seiten und der Differentiationseigenschaft $\big(x(0^-) = 0$ und $y(0^-) = 0\big)$ ergibt sich:
+  $$ a_0\cdot Y_{LT}(s) + a_1\cdot sY_{LT}(s) + a_2 \cdot s^2 Y_{LT}(s) + ... = b_0\cdot X_{LT}(s) + b_1\cdot sX_{LT}(s) + b_2\cdot s^2 X_{LT}(s) + ...$$
+  Durch Ausklammern und Umformen erhalten wir:
+  \begin{equation}
+    \label{eq:34}
+    Y_{LT}(s) = X_{LT}(s) \cdot \frac{b_0 + b_1\cdot s + b_s\cdot s^2 + ...}{a_0 + a_1\cdot s + a_2 \cdot s^2 + ...}
+  \end{equation}
 
+  \noindent Wobei der Bruch als Übertragungsfunktion $H_{LT}$ eines kontinuierlichen Systems definiert wird:
+  \begin{equation}
+    \label{eq:35}
+    H_{LT} := \frac{b_0 + b_1\cdot s + b_s\cdot s^2 + ...}{a_0 + a_1\cdot s + a_2 \cdot s^2 + ...}
+  \end{equation}
+  \noindent Die Übertragunsfunktion $H_{LT}$ enthält alle Informationen der zu Grunde liegenden Differentialgleichung und damit alle Information des Systems.\\
 
+  \noindent \textbf{Bemerkungen:}
+  \begin{itemize}
+    \item Der gesamte Informationsgehalt des Systems ist unabhängig vom Eingangssignal $x(t)$ in $H_{LT}$ komprimiert.
+    \item Man kann Ausgangssignal $y(t)$ theoretisch errechnen, wenn amn $X_{LT}(s) \cdot H_{LT}(s)$ berechnet und unter Zuhilfename der Korrespondenztabelle bzw. der Eigenschaften der Laplace-Transformation die zugehörige Zeitfunktion bestimmt.
+  \end{itemize} 
+
+  \noindent Darüber hinaus ist uns die Faltungseigenschaft der Laplace-Transformation bekannt mit:
+  $$ y(t) = x(t) * h(t) \TransformHoriz Y_{LT}(s) = X_{LT}(s) \cdot H_{LT}(s)$$
+  und somit erkennt man im Verlgeich zur Definition der Impulsantwort:
+
+  \begin{equation}
+    \label{eq:36}
+   \delta (t) \to h(t) \TransformHoriz H_{LT}(s)
+  \end{equation}
+  Die Laplace-Transformierte der Impulsantwort $h(t)$ eines LTI-Systems, ist genau die Übertragungsfuntion $H_{LT}(s)$. \\
+
+  \noindent \textbf{Frequenzgang:} \\
+  \noindent  Darüber hinaus ist bekannt, dass die Laplace-Transformierte $X_{LT}(s)$ für Eingangssignale $x(t)$, mit $x(t) = 0$ für $t <0$, identisch ist mid det Fouriertransformierten $X(\omega)$, wenn man sich mit $s$ auf $s=j\omega$ einschränkt, d.h.
+  $$X(\omega) = X_{LT}(j\omega)$$
+
+  \noindent Dies bedeutet (insofern natürlich all diese Transformierten exisiteren,), für solche Signale ist die Fouriertransformierte $H(\omega)$ der Impulsantwort $h(t)$ nichts anderes als die Einschränkung der Übertragungsfunktion $H_{LT}(s)$ auf den Streifen $s = j\omega$:
+  \begin{equation}
+    \label{eq:37}
+    h(t) \TransformHoriz H(\omega) = H_{LT}(j\omega)
+  \end{equation}
+
+  \noindent Es ergibt sich: \\
+  Wir nennen die Fouriertransformierte $H(\omega)$ der Impulsantwort $h(t)$ den sog. Frequenzgang des Systems. Dieser ist identisch mit der Übertragungsfunktion $H_{LT}(s)$ eingeschränkt auf den Streifen $s ) j\omega$. \\
+  Wir nenen $|H(\omega)|$ den Amplitudengang und $arg\big(H(\omega)\big)$ den Phasengang des Systems. \\
+
+  \noindent  \textbf{Der Frequenzgang ist wichtig weil:}
+  \begin{itemize}
+    \item Es ist wichtig inder Systemtheorie zu wissen, was mit dem Eingangssignal $x(t)$ beim Durchlaufen des Systems hin zum Ausgangssignal $y(t)$ passiert.
+    \item Man kann die Effekte des Systems gut durch die Auswirkung auf die Frequenzen des Eingangssignal charakterisieren, so dass bspw. die Frequenzen des Eingangssignal verstärkt oder gedämpft werden.
+    \item Der Amplitudengang beschreibt genau, wie die Frequenzen eiens Eingangssignals durch das System gewichtet werden, und 
+    \item der Phasengang enthält Informationen über die zeitliche Verschiebung der Frequenzanteile des Eingangssignals.
+  \end{itemize}
+
+  \noindent \textbf{Die Übertragungsfunktion ist wichtig weil:}
+  \begin{itemize}
+    \item Sie ist die direkte Berechnung der Laplace-Transformierten der Impulsantwort, die sich oftmlas als wesentlich einfacher zu berechnen ist als die direkte Berechnung der Fouriertransformierten.
+    \item Systeme lassen sich meist sehr gut durch die Lage der Pole und Nullstellen der Übertragungsfunktion in der komplexen Zahlenebene vergleichenn. 
+  \end{itemize}
+
+  \noindent \textbf{Beispiel RC-Glied (Variante 1):}\\
+  \includegraphics[height=7cm]{Pictures/BeispielVariante1.png} \\
+  \includegraphics[height=7cm]{Pictures/BeispielVariante12.png} \\
+
+  \noindent \textbf{Veranschaulichung der Schaltungen (Variante 1 und 2):}\\
+  \includegraphics[height=6cm]{Pictures/Variante1und2.png} \\
+  \includegraphics[height=8cm]{Pictures/Variante1und22.png} \\
+
+  \noindent \textbf{Handlungsanweisung zur Bestimmung von Amplituden- und Phasengang:}\\
+  Bestimme
+  \begin{itemize}
+    \item die Differentialgleichung
+    \item daraus die Übertragungsfunktion $H_{LT}(s)$
+    \item daraus den Frequenzgang $H(\omega) = H_{LT}(j\omega)$ (am Besten schon in Real und Imaginärteil aufgetrennt)
+    \item daraus den Amplituden gang $|H(\omega)|$ bzw. den Phasengang $arg\big(H(\omega)\big)$
+  \end{itemize}
+
+  \subsubsection{Schrittantwort im Bildbereich}
+  \label{sec:sub:sub:schrittantwort-bildbereich}
+  Es ist messtechnisch einfacerh die Schrittantwort zu bestimmen,
+   weshalb auch nochmal der Zusammenhang zwischen Übertragungsfunktion 
+   und der Laplace-Transformation der Schrittantwort betrachtet wird mit:
+   \begin{equation}
+    \label{eq:38}
+    \varepsilon (t) \to g(t) = \int_{0}^{t}h(\tau)\ d\tau \TransformHoriz G_{LT}(s) = \frac{1}{s}H_{LT}(s)
+  \end{equation}
+
+  \noindent Man kann bspw. auch den stationären Endwert für $t \to \infty$ nach der Aufladung aller Speicherelemente des Systems mit Hilfe des Endwertsatzes bestimmen, da
+  $$ \lim_{t\to\infty}g(t) = \lim_{s\to 0} s \cdot G_{LT}(s) = \lim_{s \to 0} H_{LT}(s)$$
+
+  \noindent \textbf{Beispiel RC-Glied (Variante 1):}\\
+  \includegraphics[height=7cm]{Pictures/Bsp1.png} 
+
+  \subsubsection{Typische Darstellungsformen von Systemen}
+  \label{sec:sub:sub:darstellungsformen-systeme}
+
+  \noindent \textbf{PN-Diagramme}\\
+  \noindent Offensichtlich enthält die Übertragungsfunktion alle Eigenschaften des betrachteten Systems.
+  \begin{itemize}
+  \item Reale Systeme in der LTI-Näherung (ohne Übersteuerung) führen zu linearen Differentialgleichungen mit konstanten Koeffizienten, welche als Übertragungsfunktion immer gebrochen-rationale Funktionen sind, d.h. ein Bruch bestehend aus Polynom im Nenner und Polynom im Zähler.
+  \item Nicht wunderlich ist also, dass die Lage der Nullstellen im Nenner, sog. Pole der Übertragungsfunktion und die Nullstellen im Zähler, sog. Nullstellen der Übertragungsfunktion eine tiefgreifende Bedeutung für die Beschreibung solcher Systeme haben.
+  \item Aus diesem Grund stellt man die lage der Pole und Nullstellen in der komplexen Zahlenebene in sog. PN-Diagrammen dar, worin die Pole als Kreuze und die Nullstellen als Kreise dargstellet werden.
+  \item \textbf{Ein System ist stabil, wenn der Polynomgrad des Zählers kleiner gleich des Polynomgrades des Nenners ist und alle Pole in der linken Halbebene liegen. }
+  \end{itemize}
+
+  \noindent \textbf{Beispiel RC-Glied:}\\
+  \includegraphics[height=6cm]{Pictures/PN.png} \\
+
+  \noindent \textbf{Bode-Diagramme}\\
+ \noindent  Ebenso sehr üblich ist die Darstellung des Amplituden- und Phasengangs in der sog. Bode-Darstellung. Dabei werden die (mathematisch nur positiven) Frequenzen $f$ dargestellt mit $f = \frac{\omega}{2\pi}$ und diese auf einer logarithmischen Achse angetragen. Über diesen Frequenzen wird einerseits der Amplitudengang ebenso logarithmisch bzw, der Phasengang normal (d.h. linear) angetragen. \\
+
+  \noindent \textbf{Beispiel RC-Glied:}\\
+  \includegraphics[height=7cm]{Pictures/Bode.png} \\
 
 
 
