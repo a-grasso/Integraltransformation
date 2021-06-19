@@ -1035,14 +1035,101 @@ eine periodisierte Version von $h[k]$ dar mit $h_p[k + v\cdot N] = h_p[k]$ für 
  \noindent  Ebenso sehr üblich ist die Darstellung des Amplituden- und Phasengangs in der sog. Bode-Darstellung. Dabei werden die (mathematisch nur positiven) Frequenzen $f$ dargestellt mit $f = \frac{\omega}{2\pi}$ und diese auf einer logarithmischen Achse angetragen. Über diesen Frequenzen wird einerseits der Amplitudengang ebenso logarithmisch bzw, der Phasengang normal (d.h. linear) angetragen. \\
 
   \noindent \textbf{Beispiel RC-Glied:}\\
-  \includegraphics[height=7cm]{Pictures/Bode.png} \\
-
-
-
-
+  \includegraphics[height=9cm]{Pictures/Bode.png} \\
 
   \subsection{Diskrete LTI-Systeme}
   \label{sec:sub:diskrete-lti-systeme}
-  
 
+  \subsubsection{Schema digitaler Systeme für die Bearbeitung von analogen Signalen}
+  \label{sec:sub:sub:schema-digital-bearbeitung-analog}
+  
+  \noindent Diskrete LTI-System, und insbesondere digitale LTI-Systeme (alle Parameterwerte dieser Systeme liegen in diskreten Schrittweiten vor), werden meist als stabile und flexible Alternative zu analogen LTI-Systemen zur Bearbeitung von kontinuierlichen Signalen verwendet. \\
+
+  \noindent \textbf{Ablauf :} \\
+  \includegraphics[height=4cm]{Pictures/Pipeline.png}
+  \begin{itemize}
+    \item \textbf{TP}: Anti-Aliasing.Filter, hat die Aufgabe das kontinuierliche Eingangssignal $x(t)$ künstlich auf Bandbreite $B$ zu begrenzen, sodass bei der Diskretisierung des Signals das Abtasttheorem automatische erfüllt ist.
+    \item \textbf{S H}: Sample-And-Hold-Schaltung, hat die Aufgabe zeitdiskretisierung vorzubereiten, sodass das Signal zu Beginn des Abtastzeitintervalls mit Breite $\Delta T_A < \frac{1}{2\cdot B}$ einmal abgetastet wird und über das ganze Intervall konstant gehalten wird.
+    \item \textbf{A/D}: Analog-Digital-Wandler, hat die Aufgabe die tatsächliche Abtastung des Signals in der Zeit mit Abtastfrequenz $f = \frac{1}{\Delta T_A}$ dzurchzuführen und quantisiert die erhaltenen Signalwerte.
+    \item \textbf{Digitales System}: Hat die Aufgabe das digitale Eingangssignal $x[n]$ in das digitale Ausgangssignal $y[n]$ zu überführen.
+    \item \textbf{D/A}: Digital-Analog-Wandler, hat die Aufgabe aus dem digitalen Signal $y[n]$ wieder ein zeitkontinuierliches Signal zu erstellen.
+    \item \textbf{TP}: Hat die Aufgabe das Signal dass nach dem D/A-Wandler durch die hohen Sprungstellen extrem hohe Frequenzen enthält zu glätten (praktisch eine Interpolation). 
+  \end{itemize}
+
+  \subsubsection{Darstellung diskreter Systeme als Differentialgleichung}
+  \label{sec:sub:sub:darstellung-diskreter-signale-differentialgleichung}
+
+\noindent  Die mathematische Beschreibung diskreter LTI-Systeme ist ähnlich zu den linearen Differentialgleichungen mit konstanten Koeffizienten bei den analogen LTI-Systemen.
+ Anstatt Differentialgleichungen werden im diskreten Fall Differenzengleichungen verwendet, die folgende grundsätzliche Struktur aufweisen: 
+
+\begin{equation}
+    \label{eq:39}
+    \begin{split}
+    y[n] + a_1 y[n-1] + a_2 y[n-2] + ... &= b_0 x[n] + b_1 x[n-1] + b_2 x[n-2] + ... \\
+    \Leftrightarrow \ y[n] &= \sum_{i=0}^{N}b_i \cdot x[n-i] - \sum_{i = 1}^{M}a_i \cdot y[n-i]
+    \end{split}
+  \end{equation}
+  Es gilt dabei zu beachten, dass der Vorfaktor vor $y[n]$ ohne Einschränkungen der Allgemeinheit auf $a_0 = 1$ gesetzt wurde. \\
+
+  \noindent Wir erkennen, der aktuelle Wert $y[n]$ hängt im Allgemeinen sowohl von den Eingabewerten $x[n]$ als auch von früheren Ausgabewerten ab. Zuerst stellen wir fest, dass in der Definition der Gleichungen nur drei Operationen verwendet werden:
+  \begin{itemize}
+    \item Diskrete Systeme können als Differenzialgleichungen beschrieben werden, die aus nur drei Operationen bestehen.
+    \item Multiplikation mit einer konstnaten: $a_0, x[n] \to a_0 \cdot x[n]$
+    \item Addition: $x[n],x[m] \to x[n] + x[m]$
+    \item Verzögerung: $y[n] \to y[n-k]$ (Verzögerung um k Schritte)
+    \item D.h. Alle diskreten (und digitalen) LTI-Systeme lassen sich mit diesen drei Operationen komplett beschreiben
+  \end{itemize}
+
+  \noindent Des Weiteren wird aus der Definitionsgleichung \ref{eq:39} definiert, dass diskrete Systeme mit der allgemeinen Differenzialgleichung und ..
+  \begin{itemize}
+    \item ... mindestens ein $a_i \neq 0$, als sog. IIR-Systeme (IIR = infinite impuls response) bezeichnet werden, d.h. das System hängt von mindestens einem vergangenen Ausgangswert ab
+    \item ... alle $a_i = 0$, als sog. FIR-System (FIR = finite impuls response) bezeichnet werden, d.h. das System hängt überhaupt nicht von vergangenen Ausgangswerten ab.
+  \end{itemize}
+
+  \noindent \textbf{Blockdiagramm für alle IIR-Systeme:} \\
+  \includegraphics[height=9cm,width=12cm]{Pictures/IIR.png} \\
+
+  \noindent \textbf{Blockdiagramm für alle FIR-Systeme:} \\
+  \includegraphics[height=9cm]{Pictures/FIR.png} \\
+
+  \noindent \textbf{Beispiel diskretisiertes RC-Glied (Variante 1):} \\
+  \includegraphics[height=7cm]{Pictures/BSPdis.png} \\
+  \includegraphics[height=3cm]{Pictures/BSPdis2.png} \\
+
+  \subsubsection{Impulsantwort diskreter Systeme}
+  \label{sec:sub:sub:impulsantwort-diskreter-systeme}
+
+  Die allgemeine Beschreibung der Impulsantwort hat auch ihre Anwendung für diskrete Systeme (man muss sich im Hinterkopf einfach den Delta-Kamm an die kontinuierlichen Signale multipliziert vorstellen). 
+  Dennoch ist die Ensprechung mit dem diskreten Delta-Impuls $\delta[n]$ und der diskreten Sprungfunktion $\varphi[n]$ wichtig:\\
+  \includegraphics[height=3cm]{Pictures/functions.png}  \\
+  Die Impulsantwort $h[n]$ eines diskreten LTI-Systems ist das Ausgangssignal, wenn man einen Delta-Impuls $x[n]:= \delta[n]$ als Eingangssignal wählt. Man schreibt:
+  $$ \delta[n] \to h[n]$$
+  \noindent Im Weiteren gilt ebenso im diskreten Fall, dass 
+  \begin{equation}
+    \label{eq:40}
+    x[n] \to x[n] * h[n]
+  \end{equation}
+  was bedeutet, das Ausgangssignal $y[n]$ eines diskreten LTI-Systems für ein beliebiges Eingangssignal $x[n]$ ist die Faltung des Eingangssignals mit der Impulsantwort, d.h. $y[n] := x[n] * h[n]$. \\
+
+  \noindent Ebenso gilt: Ein diskretes LTI-Sytem ist kausal, falls 
+  $$ h[n] = 0\ for\ n<0$$
+  und es ist BIBO-stabil, wenn
+  $$ \sum_{n=0}^{\infty}|h[n]| < \infty$$
+
+  \noindent \textbf{Impulsantwort für FIR-Systeme:} \\
+  \noindent Insbesondere hat die Impulsantwort von FIR-Systemen eine interessante Eigenschaft da alle Koeffizienten $a_i = 0$:
+  $$ \delta[n] \to h[n] = \sum_{i=0}^{N} b_i \cdot \delta[n-i] = [b_0, b_1, b_2,...,b_N]$$
+  d.h. die Impulsantwort dauert nur endlich lange und hat aussehalb der Zeitpunkte $n = 0,...,N$ immer den Wert Null. Daher auch der Name FIR = Finite Impulse Response. \\
+
+  \noindent  Darüber hinaus besteht die Impulsantwort genau aus den Koeffizienten $b_i$ der Differenzengleichung. Auch erkennt man daher, dass FIR-System deshalb immer stabil sind, da
+  $$ \sum_{n=0}^{\infty}|h[n]| = \sum_{n=0}^{N}|b[n]| < \infty$$
+
+  \noindent \textbf{Bemerkung:}
+  \begin{itemize}
+    \item Die Impulsantwort bei IIR-Systeme (also Systeme mit mindestens einem $a_i \neq 0$ ist nicht so einfach, wie bei den FIR-Systeme. In diesen Systemem können typischerweise Impulsantworten $h[n]$ entstehen, die unendlich lange andauern, daher auch IIR = Infinite Impulse Response) 
+  \end{itemize} 
+
+  \noindent \textbf{Beispiel diskretisiertes RC-Glied (Variante 1):} \\
+  \includegraphics[height=6cm]{Pictures/bsprc.png} \\
+  \includegraphics[height=8cm]{Pictures/bsprc2.png} \\
 \end{document}
