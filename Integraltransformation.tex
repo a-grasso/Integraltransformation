@@ -1,0 +1,1135 @@
+\documentclass[12pt,a4paper]{scrartcl}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage{amsmath,amssymb,amstext}
+\usepackage{fancyhdr}
+\usepackage{trsym,trfsigns}
+\usepackage{graphicx}
+\title{Integraltransformation}
+\subtitle{Zusammenfassung}
+\author{Grasso Antonino}
+\date{Sommersemester 21}
+
+\pagestyle{fancy}
+\fancyhf{}
+% Header
+\lhead{Integraltransformation}
+\rhead{Zusammenfassung}
+% Footer
+\cfoot{Grasso}
+\rfoot{\thepage}
+
+\begin{document}
+
+% Title
+\begin{titlepage}
+\maketitle
+\vspace{100px}
+
+\end{titlepage}
+
+% Table of contents
+\tableofcontents
+\newpage
+
+% Content
+
+\section{Verlauf und Rahmen}
+\label{sec:verlauf-und-rahmen}
+\includegraphics[height=10cm]{Pictures/Verlauf.png}
+
+\section{Definitionen und Konstanten}
+\label{sec:definitionen-und-konstanten}
+
+\subsection{Funktionen}
+\label{sec:sub:funktionen}
+\subsubsection{sinc-Funktion $sinc(t)$}
+\label{sec:sub:sub:sinc-funktion}
+$$sinc(t) = \frac{\sin(t)}{t}$$
+\subsubsection{Sprungfunktion $\varepsilon(t)$}
+\label{sec:sub:sub:sprungfunktion}
+$$\varepsilon(t) := $$ \includegraphics[height=5cm]{Pictures/Heaviside.svg.png}
+\subsubsection{Zeitsignal $x(t)$}
+\label{sec:sub:sub:zeitsignal}
+$$x(t) := Zeitsignal$$
+\subsubsection{Frequenzspektrum $X(\omega)$}
+\label{sec:sub:sub:frequenzspektrum}
+$$X(\omega) := Frequenzspektrum $$
+\subsubsection{Abgetastetes Zeitsignal $x_A(t)$}
+\label{sec:sub:sub:abgetastetes-zeitsignal}
+$$x_A(t) := abgetastetes\ Zeitsignal$$
+\subsubsection{Abgetastetes Frequenzspektrum $X_A(\omega)$}
+\label{sec:sub:sub:abgetastetes-frequenzspektrum}
+$$X_A(\omega) := abgetastetes\ Frequenzspektrum $$
+
+\subsection{Variablen von analogen Signalen}
+\label{sec:sub:const-def-analoge-signale}
+\subsubsection{Periodendauer $T_p$}
+\label{sec:sub:sub:periodendauer}
+$$ x(t) := \mathbb{R} \to \mathbb{R}$$
+$$T_p := x(t + n \cdot T_p) = x(t)$$
+\subsubsection{Frequenz $f$}
+\label{sec:sub:sub:frequenz}
+$$f = \frac{1}{T_p} = \frac{\omega_p}{2\pi}$$
+\subsubsection{Kreisfrequenz $\omega_p$}
+\label{sec:sub:sub:periodendauer-im-spektrum-kreisfrequenz}
+$$\omega_p = \frac{2\pi}{T_p}$$
+\subsubsection{Bandbreite $B$}
+\label{sec:sub:sub:bandbreite}
+$$B :=$$ höchste vorkommende Frequenz
+
+\subsection{Variablen von diskreten Signalen}
+\label{sec:sub:const-def-diskrete-signale}
+
+\subsubsection{Abtastfrequenz $f_A$}
+\label{sec:sub:sub:abtastfrequenz}
+$$f_A = \frac{1}{\Delta T_A} = \frac{\omega_p}{2\pi}$$
+
+\subsubsection{Blocklänge $N$}
+\label{sec:sub:sub:blocklaenge}
+$$N :=$$ Anzahl an Stellen des diskreten Signals
+$$T_A \cdot \omega_P = 2\pi \cdot N$$ Das Produkt aus Periodendauern ist eine konstante Grösse, welche sich nur mit der Blocklänge N verändern lässt.\\
+$\to$ Unschärferelation der DFT (1. Variante)
+$$\Delta T_A \cdot \Delta \omega_P = \frac{2\pi}{N}$$ Das Produkt der Abtastabstände ist ebenso eine konstante Grösse, welche sich nur durch Blocklänge N verändern lässt.\\
+$\to$ Unschärferelation der DFT (2. Variante)
+
+\subsubsection{Zeitabstände $\Delta T_A$}
+\label{sec:sub:sub:delta-t-a}
+$$\Delta T_A :=$$ Zeitabstände der Abtastung im Zeitraum
+
+\subsubsection{Frequenzabstände $\Delta \omega_p$}
+\label{sec:sub:sub:delta-omega-p}
+$$\Delta \omega_p :=$$ Frequenzabstände der Abtastung im Frequenzspektrum \\
+$$\Delta \omega_P = \frac{2\pi}{T_A} \Rightarrow$$ Länge der Periode im Zeitraum legt Feinheit der Abstastung im Frequenzraum fest.
+
+\subsubsection{Periodendauer im Zeitraum $T_A$}
+\label{sec:sub:sub:t-a}
+$$T_A = N \cdot \Delta T_A :=$$ Periodendauer im Zeitraum $=$ Signaldauer
+
+\subsubsection{Periodendauer im Frequenzspektrum $\omega_p$}
+\label{sec:sub:sub:omega-p}
+$$\omega_p = N \cdot \Delta \omega_P :=$$ Periodendauer im Frequenzraum $=$ max. Signalfrequenz\\
+$$\omega_p = \frac{2\pi}{\Delta T_A} \Rightarrow$$ Die Feinheit der Abtastung im Zeitraum legt die maximale angenommene Frequenz fest $\to$ Abtasttheorem!
+
+\subsection{Systeme}
+\label{sec:sub:systeme}
+
+\subsubsection{LTI-System}
+\label{sec:sub:lti-system}
+LTI-System $\widehat{=}$ lineares und zeitinvariantes System
+
+
+\newpage
+\section{Signale und Fouriertransformation}
+\label{sec:signale-und-fouriertransformation}
+
+
+\subsection{Klassifizierung von Signalen}
+\label{sec:sub:klassifizierung-von-signalen}
+\includegraphics[height=2cm]{Pictures/Einheiten.png}
+
+
+\subsection{Analoge Signale}
+\label{sec:sub:analoge-signale}
+
+\subsubsection{Fourierreihe (analoge, periodische Signale)}
+\label{sec:sub:sub:fourier-reihe}
+
+Jedes Signal $x(t)$ kann als unendliche Summe von überlagerten Sinus und Cosinus Funktionen dargstellt werden: \\
+
+\noindent  \textbf{Sinus-Cosinus-Darstellung der Fourierreihe:}
+\begin{equation}
+  \label{eq:1}
+  \begin{split}
+  x(t) &=\frac{a_0}{2} + \sum_{n=1}^{\infty}\big(a_n \cdot \cos(n \omega_p t) + b_n \cdot \sin(n \omega_p t)   \big)  \\
+a_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \cos(n\omega_p t)\ dt \\
+b_n &= \frac{2}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot \sin(n\omega_p t)\ dt
+    \end{split}
+\end{equation}
+\noindent $a_n$ und $b_n$ dienen hierbei als Ähnlichkeitsmass wie sehr sich die Ursprungsfunktion $x(t)$ der jeweiligen Elementarfunktion $\big(sin(n\omega_p t)$ oder $cos(n\omega_p t)\big)$ ähnelt.\\
+
+\noindent \textbf{Bemerkungen:}
+    \begin{itemize}
+      \item Die Fourierreihe nimmt an Sprungstellen den Mittelwert von linksseitigem und rechtsseitigem Grenzwert an
+      \item Zur Berechnung der Fourierkoeffizienten lässt sich das Integrationsintervall verschieben z.B. zu $(0,T_p)$. \\
+    \end{itemize} 
+
+    \noindent \textbf{Betrags-/Phasen-Darstellung der Fourierreihe:}
+\begin{equation}
+    \label{eq:2}
+    \begin{split}
+    x(t) &=\frac{A_0}{2} + \sum_{n=1}^{\infty} A_n \cdot \cos(n \omega_p t + \varphi_n)  \\
+  A_n &= \sqrt{a^2_n + b^2_n} \\
+  \varphi_n &= -\arctan\bigg(\frac{b_n}{a_n}\bigg)
+      \end{split}
+  \end{equation}
+  \noindent Diese Darstellung lässt sich aus den Additionstheoremen von Sinus und Cosinus ableiten. \\
+
+  \noindent \textbf{Komplexe Darstellung der Fourierreihe:}
+  \begin{equation}
+    \label{eq:3}
+    \begin{split}
+    x(t) &= \sum_{n= -\infty}^{\infty} c_n e^{jn\omega_p t}\\
+    c_n &= \frac{1}{T_p} \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}} x(t) \cdot e^{-jn\omega_p t}\ dt
+    \end{split}
+  \end{equation}
+  \noindent Herleitung: \\
+  Mit 
+  $$e^{j\omega t} := \cos(\omega t) + j\cdot \sin(\omega t)$$ erhält man $$\cos(\omega t) = \frac{1}{2}(e^{j\omega t} +  e^{-j\omega t})$$ 
+  und daher:
+  $$\frac{A_0}{2} + \sum_{n=1}^{\infty} A_n \cdot \cos(n \omega_p t + \varphi_n) =  \sum_{n=0}^{\infty}c_n e^{jn\omega_p t} +  \sum_{n=1}^{\infty}c_{-n}e^{-jn\omega_p t}$$
+  $$c_n = \frac{A_n}{2} e^{j\varphi_n}$$
+  $$ c_{-n} = \frac{A_n}{2} e^{-j\varphi_n}$$ 
+
+  \noindent \textbf{Umformungen:}\\
+  \includegraphics[height=6cm]{Pictures/Umformung.png} \\
+
+  \noindent \textbf{Bedingungen für die Transformation:} 
+  \begin{itemize}
+  \item Die Funktion muss periodisch sein.
+  \item  Innerhalb einer Periode aufteilbar in endlich viele stetige Teilstücke.
+  \item Es dürfen keine divergierende Sprungstellen auftauchen.
+  \end{itemize}
+
+  \subsubsection{CTFT (analoge, nicht-periodische Signale)}
+  \label{sec:sub:sub:ctft}
+
+  \noindent Der Sinn der CTFT: Man möchte vom Zeitsignal $x(t)$ zum Frequenzspektrum $X(\omega)$. \\
+  \noindent Die Idee der CTFT: Man nimmt die Fourierreihe und lässt $T_p \to \infty$ gehen: \\
+  \begin{equation}
+    \label{eq:4}
+      \begin{split}
+      X(\omega) &= \int_{-\infty}^{ \infty} x(t) \cdot e^{-j \omega t}\ d t\ (CTFT/FT) \ (aus\ 5) \\
+      x(t) &= \frac{1}{2\pi} \int_{-\infty}^{ \infty} X(\omega) \cdot e^{j \omega t}\ d \omega\ (ICTFT/IFT) \ (aus\ 6) 
+      \end{split}
+    \end{equation}
+ \noindent   Herleitung:\\
+  \noindent Wir definieren eine Hilfsvariable: $\omega_n = n\omega_p$, sodass gilt:
+  $\omega_{n+1} - \omega_n = \omega_p = \frac{2\pi}{T_p}$ und beginnen mit:
+  $$x(t) = \sum_{n=-\infty}^{\infty} c_n e^{j \omega_n t}$$
+  und
+  $$c_n := \frac{1}{T_p}\int_{-\frac{T_p}{2}}^{\frac{T_p}{2}}x(t) \cdot e^{-j \omega_n t}\ dt$$
+
+  \noindent Wir definieren eine Funktion in Abhängigkeit von $\omega_n$:
+  \begin{equation}
+  \label{eq:5}
+    \begin{split}
+    X(\omega_n) &:= \frac{2\pi}{\omega_p}c_n\ \ \big( \Leftrightarrow c_n = \frac{\omega_p}{2\pi}X(\omega_n)\big)\\
+    &= \int_{-\frac{T_p}{2}}^{\frac{T_p}{2}}x(t) \cdot e^{-j \omega_n t}\ d t
+    \end{split}
+  \end{equation}
+
+  \noindent Das neu gewonnene $c_n$ wird nun als Koeffizient in die ursprüngliche komplexe Fourierreihe eingesetzt:
+  \begin{equation}
+    \label{eq:6}
+      \begin{split}
+      x(t) &= \sum_{n=-\infty}^{\infty}\frac{\omega_p}{2\pi}X(\omega_n)e^{j\omega_n t}\\
+      &= \frac{1}{2\pi} \sum_{n=-\infty}^{\infty} X(\omega_n) e^{j\omega_n t} \omega_p \\
+      &= \frac{1}{2\pi} \sum_{n=-\infty}^{\infty} X(\omega_n) e^{j\omega_n t} \ (\omega_{n + 1} - \omega_n)  \\
+      \end{split}
+    \end{equation}
+    \noindent Lässt man nun $T_p \to \infty$ gehen, wird $\omega_p$ immer kleiner und die Unterteilungen $\omega_n$ wandern dichter zueinander
+    und im Grenzfall ein kontinuierlicher Verlauf $(\omega_ n \to \omega)$ und man erhält ein Riemann-Integral. Daraus folgert sich die oben aufgeführten Integrale für $x(t)$ und $X(\omega)$.\\
+
+    \noindent  \textbf{Bemerkungen:}
+    \begin{itemize}
+      \item Stärke des Vorhandenseins einer Frequenz: $|X(\omega)|$
+      \item Verschiebung der einzelenen Frequenzen: $\varphi = \arg(X(\omega))$
+      \item Es gilt: $\overline{X(\omega)} = X(-\omega)$
+      \item Bei reellen Signalen ist Betragsspektrum $|X(\omega)|$ symmetrich um Null
+    \end{itemize}
+
+    \subsubsection{Einschub: Die kontinuierliche Faltung}
+  \label{sec:sub:sub:faltung}
+
+  \begin{equation}
+    \label{eq:7}
+      \begin{split}
+      y(t) &:= x_1 (t) * x_2 (t) = \int_{-\infty}^{\infty} x_1 (\tau) \cdot x_2 (t-\tau)\ d \tau \\
+      \end{split}
+    \end{equation}
+  
+    \noindent (Integral)\\
+    \noindent Mit der Laufvariable $\tau$ läuft man $x_1$ forwärts durch und $x_2$ rückwärts aber um $t$ verschoben durch. \\
+    $t$ ist hier als fester, bekannter Wert zu interpretieren. \\
+
+    \noindent(Faltung) (Man macht das was oben drüber steht für jedes beliebige $t$)\\
+    \noindent Man legt ein $\tau$ für $x_1$ und $x_2$ fest, verändert $t$ laufend und sieht sich die Schnittfläche der beiden Funktionen an. \\
+
+    \noindent Main Purpose in der Signalverarbeitung: Abschwächung / Auslöschung von hohen Frequenzen.
+
+  \subsubsection{Einschub: Der Delta-Impuls}
+  \label{sec:sub:sub:delta-impuls}
+
+  \noindent Wir definieren eine Funktion:
+  \begin{equation}
+    \label{eq:8}
+    \begin{split}
+    \delta (t) &= 0\ \ for\ t \neq 0 \\    
+    \int_{-\infty}^{\infty} \delta (t)\ d t &= 1
+    \end{split}
+    \end{equation}
+  \includegraphics[height=4cm]{Pictures/DeltaImpuls.png} \\
+
+  \noindent  \textbf{Verwendung des Delta-Impulses (Ausblendeigenschaft):}
+  \begin{equation}
+    \label{eq:9}
+    \begin{split}
+    \int_{-\infty}^{\infty} x(t) \cdot \delta(t-t_0)\ d t &= \int_{-\infty}^{\infty} x(t_0) \cdot \delta (t-t_0)\ d t \\    
+    &= x(t_0) \cdot \int_{-\infty}^{\infty} \delta (t-t_0)\ dt \\
+    &=x(t_0)
+    \end{split}
+    \end{equation}
+    \noindent $x(t)$ wird überall ignoriert ausser an der Stelle an der $\delta(t-t_0) \neq 0$, d.h. bei $t = t_0$.\\
+    Quasi eine Abtastung der Funktion $x(t)$ an Stelle $t_0$.\\
+
+    \noindent \textbf{Fouriertransformation des Delta-Impulses:}
+    $$\int_{-\infty}^{\infty} \delta(t) \cdot e^{-j\omega t}\ dt = \int_{-\infty}^{\infty} \delta(t) \cdot e^{-j\omega 0}\ dt = \int_{-\infty}^{\infty} \delta(t) = 1$$
+    $$\delta(t) \TransformHoriz 1 $$ 
+    Das Spektrum des Delta-Impulses enthält alle Frequenz mit Gewicht 1! \\
+
+    \noindent \textbf{Die Stammfunktion des Delta-Impulses: $\varepsilon(t)$:}
+    $$\varepsilon (t) = \int_{-\infty}^{t} \delta(\tau)\ d \tau \Leftrightarrow  \frac{d}{dt} \varepsilon (t) = \delta (t) $$
+
+     \noindent \textbf{Fouriertransformation der Sprungfunktion:}
+     $$\varepsilon(t) \TransformHoriz \pi \cdot \delta(\omega) + \frac{1}{j\omega} $$
+
+  \subsubsection{Faltung mit dem Delta-Impuls}
+  \label{sec:sub:sub:faltung-mit-delta-impuls}
+
+  \begin{equation}
+    \label{eq:10}
+    \begin{split}
+    x(t) * \delta(t-t_0) &= \int_{-\infty}^{\infty} x(\tau) \cdot \delta\big((t-t_0) - \tau\big)\ d \tau  \\
+    &= \int_{-\infty}^{\infty} x(\tau) \cdot \delta \big(\tau -(t-t_0)\big)\ d \tau \\    
+    &=x(t - t_0)
+    \end{split}
+    \end{equation}
+
+\noindent    Kurz bedeutet das
+    $$x(t) * \delta(t-t_0) = x(t-t_0)\ ,$$
+    und für $t_0 = 0$
+    $$x(t) * \delta(t) = x(t)\ .$$
+    \noindent Der Delta-Impuls ist das Neutrale Element bezüglich der Faltung!
+
+  \subsubsection{Besonderheiten der CTFT}
+  \label{sec:sub:sub:besonderheiten-ctft}
+
+  \noindent \textbf{Eigenschaften der CTFT:}\\
+  \includegraphics[height = 7cm]{Pictures/EigenschaftenCTFT.png}\\
+  \includegraphics[height = 6cm]{Pictures/EigenschaftenCTFT2.png}\\
+  \includegraphics[height = 5cm]{Pictures/EigenschaftenCTFT3.png} \\
+
+  \noindent \textbf{Signaldauer-Bandbreite-Produkt:}\\
+  \includegraphics[height=5cm]{Pictures/SignalBand.png} \\
+
+  \noindent \textbf{Korrespondenzen der CTFT:} \\
+  \includegraphics[height = 6cm]{Pictures/Korrespondenz.png}\\
+  \includegraphics[height = 7cm]{Pictures/Korrespondenz2.png}\\
+  \includegraphics[height = 5cm]{Pictures/Korrespondenz3.png}
+
+  \newpage
+  \subsection{Diskrete Signale}
+  \label{sec:sub:diskrete-signale}
+
+  \subsubsection{Delta-Kamm}
+  \label{sec.sub:sub:delta-kamm}
+  \noindent Die Idee eines Delta-Kamms: Aus einer kontinuierlichen Funktion wird eine Zahlenfolge gemacht. \\
+  
+\noindent Um eine Zahlenfolge aus einer kontinuierlichen Funktion zu erhalten, muss diese abgetastet werden. 
+Die Abtastung einer kontinuierlichen Funktion erfolgt mit einem Delta-Kamm:
+  \begin{equation}
+    \label{eq:11}
+      \sum_{n = -\infty}^{\infty} \delta (t-n\Delta T_A)
+  \end{equation}
+\noindent Der Delta-Kamm stellt eine Schar einzelner Delta-Impulsen an bestimmten gewünschten Abtastungsorten mit gleichem Abstand voneinander dar: \\
+\includegraphics[height=5cm]{Pictures/DeltaKamm.png}
+
+\subsubsection{Abgetastetes Signal}
+  \label{sec.sub:sub:abgetastetes-signal}
+\noindent Ein abgetastetes Signal ist mit Hilfe des Delta-Kamms definiert durch:
+\begin{equation}
+  \label{eq:12}
+    x_A(t) := x(t) \cdot \sum_{n = -\infty}^{\infty} \delta (t-n\Delta T_A)
+\end{equation} 
+\includegraphics[height=5cm]{Pictures/AbgetastetSignal.png} \\
+\noindent $x_A(t)$ wird auch als Diskretes Signal bezeichnet.
+
+\subsubsection{DTFT (diskrete, nicht-periodische Signale)}
+  \label{sec.sub:sub:dtft}
+
+  \noindent Mit Hilfe der Ausblendeigenschaft des Delta-Impulses kann man die Fouriertransformation eines solchen abgetasteten Signals bestimmen:
+  \begin{equation}
+    \label{eq:13}
+    \begin{split}
+      X_A(\omega) &=  \int_{-\infty}^{\infty} x_A(t) \cdot e^{-j \omega t}\ d t \\
+      &=  \int_{-\infty}^{\infty} x(t) \cdot \sum_{n = -\infty}^{\infty} \delta (t-n\Delta T_A) e^{-j \omega t}\ d t\\
+      &= \sum_{n = -\infty}^{\infty} \int_{-\infty}^{\infty} x(t) e^{-j\omega t} \cdot \delta(t-n\Delta T_A)\ dt\\
+      &= \sum_{n=-\infty}^{\infty} x(n\Delta T_A) e^{-j\omega n \Delta T_A}
+    \end{split}
+  \end{equation} 
+  \\
+  \noindent  \textbf{Bemerkungen:}
+  \begin{itemize}
+    \item Ein diskretes Zeitsignal führt dennoch zu einem kontinuierlichen Frequenzspektrum
+    \item Durch Abtastung eines Zeitsignals mit Zeitabständen $\Delta T_A$ wird Frequenzspektrum periodisch mit Periodendauer $\omega_p:= \frac{2\pi}{\Delta T_A}$
+    \item diskretes Zeitsignal $\TransformHoriz$ periodisches Spektrum
+    \item periodisches Zeitsignal $\TransformHoriz$ diskretes Spektrum
+    \item Zusammenhang CTFT und DTFT: $x_A(\omega) = \frac{1}{\Delta T_A} \sum_{ =-\infty}^{\infty} X\Big(\omega - \frac{2\pi n}{\Delta T_A}\Big)$
+  \end{itemize}
+
+  \subsubsection{Abtasttheorem}
+  \label{sec.sub:sub:abtasttheorem}
+
+\includegraphics[height=9cm]{Pictures/Abtasttheorem.png} \\
+\noindent Man folgert: $\omega_P > 2 \cdot 2\pi B$
+
+\noindent Daraus ergibt sich das eigentliche Abtasttheorem:
+\begin{equation}
+  \label{eq:14}
+  \begin{split}
+    f_A = \frac{1}{\Delta T_A} > 2 \cdot B
+    \Rightarrow \Delta T_A < \frac{1}{2 \cdot B}
+  \end{split}
+\end{equation} 
+
+\noindent Ist das Abtasttheorem beim Abtasten eines Signales eingehalten, so kann versichert werden,
+dass keine Informationen des Originalsignals verloren gehen und eine Rekonstruktion ist möglich.\\
+$\Rightarrow$ "Mindestens mit der doppelt so grossen Frequenz wie im Originalsignal vorhanden ist abtasten." \\
+
+\noindent  \textbf{Bemerkungen:}
+  \begin{itemize}
+    \item Die höchsten Frequenzen sind die, die zuerst unter der Verletzung des Abtasttheorems leiden (Unterabtastung)
+    \item Informationsverlust ist nicht leicht zu beheben
+    \item In der Praxis verwendet man häufig eine deutliche Überabtastung \\
+  \end{itemize}
+
+  \subsubsection{Rekonstruktion von abgetasteten Signalen}
+  \label{sec.sub:sub:rekonstruktion-von-abgetasteten-signalen}
+
+  \noindent   Unter der Annahme, dass das Abtasttheorem mit Zeitintervallen $\Delta T_A$ nicht verletzt wird,
+  kann aus den diskreten Abtastwerten $x(n \Delta T_A)$ 
+  die kontinuierliche Originalfunktion $x(t)$ rekonstruiert werden mit:
+  \begin{equation}
+    \label{eq:15}
+    \begin{split}
+     x(t) &:= \sum_{n=-\infty}^{\infty} x(n \Delta T_A) \cdot sinc\bigg(\frac{\pi}{\Delta T_A}(t-n\Delta T_A)\bigg)
+    \end{split}
+  \end{equation} 
+  $\Rightarrow$ "Man interpoliert die diskreten Punkten mit der $sinc$-Funktion." \\
+
+  \noindent Herleitung: \\
+  \noindent 1. Schritt: Isolieren einer Periode durch Fenstern\\
+  Man verwendet einen wichtigen Trick: Das sogenannte Fenstern von Signalen. \\
+  Man multipliziert die periodische Fouriertransformierte des Abtastsignals $X_A(\omega)$ 
+  mit einem Rechteckpuls der Breite $\omega_P$, 
+  um die Fouriertransformierte des Originalsignals $X(\omega)$ zurück zu gewinnen:\\
+  
+  \includegraphics[height = 12cm]{Pictures/Fenstern.png}
+
+  \noindent Signal Fenstern mathematisch: \\
+  \begin{equation}
+    \label{eq:116}
+    \begin{split}
+      X(\omega) &= X_A(\omega) \cdot \Delta T_A \cdot rect\bigg(\frac{\omega}{\omega_P}\bigg) \\
+      &= X_A(\omega) \cdot \Delta T_A \cdot rect\bigg(\frac{\omega \Delta T_A}{2\pi}\bigg)
+    \end{split}
+  \end{equation} 
+
+  \noindent 2. Schritt: Zurücktransformieren\\
+  (Multiplikation im Spektrum $\Rightarrow$ Faltung im Zeitsignal)
+  \begin{equation}
+    \label{eq:17}
+    \begin{split}
+      X(\omega) &\TransformHoriz x_A(t) * sinc\bigg(\frac{t\pi}{\Delta T_A}\bigg) \\
+        &= \int_{-\infty}^{\infty}x(\tau) \cdot \sum_{n=-\infty}^{\infty} \delta(\tau - n\Delta T_A) \cdot sinc\bigg(\frac{\pi}{\Delta T_A}(t-\tau)\bigg)\ d\tau \\
+         &= \sum_{n=-\infty}^{\infty} \int_{-\infty}^{\infty}x(\tau) \cdot sinc\bigg(\frac{\pi}{\Delta T_A}(t-\tau)\bigg) \delta(\tau - n\Delta T_A)\ dt \tau \\
+         &= \sum_{n=-\infty}^{\infty} x(n \Delta T_A) \cdot sinc\bigg(\frac{\pi}{\Delta T_A}(t-n\Delta T_A)\bigg) = x(t) 
+        \end{split}
+  \end{equation} 
+
+
+  \subsubsection{DFT (diskrete, periodische Signale)}
+  \label{sec.sub:sub:dft}
+
+\noindent Der Sinn der DFT: Man will nicht nur das Signal auf einer digitalen Rechen- oder Speichereinheit verarbeiten, sondern auch das Spektrum. \\
+  Die Idee der DFT: \\
+    diskretes \& periodisches Zeitsignal $\TransformHoriz$ diskretes \& periodisches Spektrum \\
+\begin{equation}
+  \label{eq:18}
+  \begin{split}
+    X[m] = \sum_{n = 0}^{N-1} x[n]& e^{-j2\pi \frac{mn}{N}}\ (DFT) \\
+    x[n] = \frac{1}{N}\sum_{m = 0}^{N-1} &X[m] e^{j2\pi \frac{mn}{N}}\ (IDFT) \\
+    wobei& \\
+    x[n] := x&(n\Delta T_A) \\
+    X[m] := X&(m\Delta \omega_P)
+  \end{split}
+\end{equation}
+\noindent Es gilt für Zeitsignal und Frequenzspektrum in dieser Darstellung die gleiche Periode N, d.h. $X[m+N] = X[m]$ und $x[m +N] = x[n]$. \\
+
+\noindent  \textbf{Bemerkungen:}
+  \begin{itemize}
+    \item Man erhält für $N$ abgetastete Werte des Originalsignals automatisch auch $N$ Werte des Spektrums. 
+    \item Zusammenhang diskretes Zeit- und Spektralsignal:\\\includegraphics[height = 4cm]{Pictures/ZusammenhangN.png} 
+    \item $X[N-m] = \overline{X[m]}$ und damit auch $|X[N-m]| = |\overline{X[m]}| = |X[m]|$
+    \item Für ein reelles Signal x[n] ist das Betragsspektrum $|X[m]|$ immer symmetrich innerhalb einer Periode: $|X[m]| = |X[N-m]|$ für $m = 0,...,N-1$ \\
+  \end{itemize}
+
+ \noindent   Die Herleitung der DFT wird in 5. Schritten aufgeteilt: 
+ \begin{itemize}
+   \item Schritte 1-2: Erzeugen des diskreten und periodischen Zeitsignals für die DFT
+   \item Schritte 3-5: Zusammenhang zwischen dem diskreten und periodischen Zeitsignal mit seinem diskreten und periodischen Spektrum 
+   \item Der Zusammenhang wird durch folgende Argumentation erreicht: \\diskretes \& periodisches Zeitsignal $\TransformHoriz$ CTFT \{$\cdot$\} $\InversTransformHoriz$ ICTFT\{CTFT \{$\cdot$\}\}  
+ \end{itemize}
+
+ \noindent \\ 1. Schritt
+ \begin{itemize}
+   \item kontinuierliches Zeitsignal $x(t)$ im Intervall $[0, T_A]$ fenstern, so dass wesentliche Signalinformation enthalten ist.
+   \item gefensterte Signal künstlich periodisch fortsetzen und umbenennen zu $x_P (t)$.
+   \item Potentielle Fehler: Falsch abschneiden fürs zukünftige Periodisieren. \\$\to$ Leakage Fehler
+ \end{itemize}
+ 
+ \noindent \\ 2. Schritt
+ \begin{itemize}
+  \item Abtastung des periodischen Signals $x_P (t)$ wobei $N$ Abtastzeitpunkte im Grundintervall $[0, T_A]$ untergebracht werden. N wird als Blocklänge des diskreten Signals bezeichnet. 
+  \item Dadurch haben die Abtastzeitpunkte einen Abstand von $\Delta T_A := \frac{T_A}{N}$. D.h. wir betrachten das abgetastete Signal: $$x_P (t) \cdot \sum_{n = -\infty}^{\infty} \delta(t - n \Delta T_A)$$
+  \item Potentielle Fehler: Abtasttheorem verletzen.
+\end{itemize}
+\noindent\\ Grafik 1. und 2. Schritt:\\
+\includegraphics[height = 12cm]{Pictures/Schritt1.png}
+
+\noindent \\ 3. Schritt | Konkrete Herleitung erspart
+ \begin{itemize}
+  \item Fouriertransformation (CTFT) für das abgetastete Signal: \begin{equation}
+    \label{eq:19}
+    \begin{split}
+      & x_P (t) \cdot \sum_{n = -\infty}^{\infty} \delta(t - n \Delta T_A) \\
+      \TransformHoriz & \Bigg[ \frac{2\pi}{N \Delta T_A} \sum_{n = 0}^{N -1} x(n \Delta T_A) e^{- j n\Delta T_A \omega} \Bigg] \cdot \Bigg[\sum_{k = -\infty}^{\infty} \delta(\omega - k\Delta \omega_p) \Bigg]
+    \end{split}
+  \end{equation}
+  \item Es gilt im Grundintervall $[0, T_A]$, dass $x_p(n\Delta T_A) = x(n \Delta T_A)$.
+  \item Es gilt im Grundintervall, dass die Konstante $\Delta \omega_p := \frac{2\pi}{N \Delta T_A}$ eingeführt wird.
+  \item Wir stellen fest: Die Fouriertransformierte ist ein abgetastetes Signal mit Abtastorten $k\Delta\omega_p, k \in \mathbb{Z}$.
+\end{itemize}
+
+\noindent \\ 4. Schritt | Konkrete Herleitung erspart
+ \begin{itemize}
+  \item Inverse Fouriertransformation (ICTFT) auf das Spektrum, um wieder das Originalsignal an den Abtastorten zu erhalten: \begin{equation}
+    \label{eq:20}
+    \begin{split}
+      \InversTransformHoriz & \Bigg[ \frac{1}{N} \sum_{k = 0}^{N -1} \sum_{n = 0}^{N -1}  x(n \Delta T_A) e^{- j 2\pi \frac{k n}{N}}e^{j2\pi \frac{k}{N} \frac{t}{\Delta T_A}} \Bigg] \cdot \Bigg[\sum_{l = -\infty}^{\infty} \delta(\omega - l\Delta T_A) \Bigg]
+    \end{split}
+  \end{equation}
+  \item Die fordere eckige Klammer ist identisch zu $x_p(t)$.
+  \item Ist $t \in [0,T_A]$, ist die fordere eckige Klammer sogar identisch zu x(t).
+  \item Gilt auch für spezielle $t$: Für ein $t_0 \in [0,T_A] \Rightarrow x(t_0)$.
+\end{itemize}
+
+\noindent \\ 5. Schritt
+ \begin{itemize}
+  \item Die Erkenntnis von Schritt 4 für $t_0 = m\Delta T_A$ anwenden: 
+  \begin{equation}
+    \label{eq:21}
+    \begin{split}
+      x(m\Delta T_A) &= \frac{1}{N} \sum_{k = 0}^{N -1} \Bigg[ \sum_{n = 0}^{N -1}  x(n \Delta T_A) e^{- j 2\pi \frac{k n}{N}} \Bigg] e^{j2\pi \frac{km}{N} }
+    \end{split}
+  \end{equation}
+  \item Die eckige Klammer $ =: X(k\Delta \omega_P)$ (DFT)
+  \item Der ganze Ausdruck $ =:$ IDFT
+\end{itemize}
+
+
+\subsubsection{Handlungsanweisung zur DFT}
+Dieser Abschnitt behandelt die konkrete Anwendung der DFT für z.B. eine Spektralanalyse oder digitale Filterung. \\
+Man beginnt mit einem realen, kontinuerlichen Signal und will auch nach der DFT und IDFT dort wieder ankommen. \\
+
+\noindent   Die Handlungsanweisung beinhaltet 7.Schritte:
+ \begin{itemize}
+   \item Schritte 1-3: Theoretischer Analog-Digital-Wandler.
+   \item Schritte 4-6: Untersuchung (= Spektralanalyse) und Veränderung (= Filterung) des Spektrums. 
+   \item Schritt 7: Theoretischer Digital-Analog-Wandler.
+ \end{itemize}
+
+ \noindent \\ \textbf{1. Schritt}
+ \begin{itemize}
+ \item Fenstern eines gegebenen kontinuierlichen Zeitsignal so passend, dass bei periodischer Fortsetzung keine künstliche plötzliche Störung des Signals auftritt.
+ \item Dadurch wird $T_A$ festgelegt.
+ \item Falsches fenstern führt zum Leakage Fehler \\(Sprünge im Zeitsignal $\to$ Falsche Frequenzen im Spektrum): \\\includegraphics[height=10cm]{Pictures/BSPSchritt1.png} 
+ \end{itemize}
+
+ \noindent \\ \textbf{2. Schritt}
+ \begin{itemize}
+  \item Bestimmen der Blocklänge $N$, sodass das Abtasttheorem nicht verletzt wird. D.h. für ein bandbegrenztes Signal mit Bandbreite B ergibt sich dies zu: $$N \geq 2\ B\cdot T_A$$
+  \item Hat man nun das beliebige $N$, kann man daraus die verwendete Abtastabstände bestimmen: $$ \Delta T_A = \frac{T_A}{N}$$
+  \item Verletzung des Abtasttheorems führt zu Aliasing-Effekt \\(Unterabtastung $\to$ Misinformation): verweis auf \ref{sec.sub:sub:abtasttheorem} \\
+ \end{itemize}
+
+ \noindent \\ \textbf{3. Schritt}
+ \begin{itemize}
+  \item Abtasten des Signals zu den Zeitpunkten $t = n \Delta T_A,\ n = 0, .., N-1$ und es ergeben sich die diskreten Signalwerte: $$x[n] = x(n\Delta T_A)$$
+ \end{itemize}
+
+ \noindent \\ \textbf{4. Schritt}
+ \begin{itemize}
+  \item DFT durchführen:$$ X[m] = \sum_{n=0}^{N-1} x[n] e^{-j 2\pi \frac{mn}{N}},\ m= 0,..,N-1$$ an den Abtastorten $\omega_m = m\Delta \omega_P = m\frac{2\pi}{T_A},\ m= 0,..,N-1$.
+ \end{itemize}
+
+ \noindent \\ \textbf{5. Schritt}
+ \begin{itemize}
+  \item Betrachten und/oder verändern des Spektrums. Da die Veränderung (Filterung) des Spektrums eine so zentrale Rolle in der digitalen Signalverarbeitung spielt, wird aus dem gegbenen Spektrum X[m] ein neues Spektrum Y[m] erzeugt, bspw. durch Multiplikation einer Gewichtsfunktion $G$: $$Y[m] := G \cdot X[m], m = 0,..,N-1$$
+ \end{itemize}
+
+ \noindent \\ \textbf{6. Schritt}
+ \begin{itemize}
+  \item IDFT durchführen, um das gefilterte, diskrete Zeitsignal zu erhalten: $$ y[n] = \frac{1}{N} \sum_{m=0}^{N-1} Y[m]e^{j2\pi\frac{mn}{N}},\ n = 0,..N-1$$
+  \item In vielen Anwendungen der digitalen Signalverarbeitung hört man hier auf, wenn man sich nicht für eine kontinuierliche Version des gefilterten Signals interessiert, sonst Rekonstruktion.
+ \end{itemize}
+
+ \noindent \\ \textbf{7. Schritt}
+ \begin{itemize}
+  \item An Schritt 6 anknüpfend kann man mit der Rekonstruktionsformel aus dem diskreten Signal die kontinuierliche, periodische Signalrekonstruktion bestimmen: $$y_p(t) = \sum_{n = -\infty}^{\infty} y[n] \cdot sinc \bigg(\frac{\pi}{\Delta T_A} ( t- n\Delta T_A)\bigg)$$
+  \item Praktisch kann die undendliche Summe durch eine endliche Summe angenähert werden.
+  \item Gute Annäherung: $$\sum_{n = -N+1}^{2N-2}$$
+ \end{itemize}
+
+ \noindent  \\ \textbf{Zero-Padding}
+ \begin{itemize}
+   \item Beliebtes Mittel bei gegebenen Abtastabständen $\Delta T_A$ eine feinere Abtastung des Spektrums zu erreichen ist das $zero-padding$: $x[n]$ mit Nullen füllen
+   \item Blocklänge $N$ und Signaldauer $T_A$ werden so künstlich vergrössert. 
+   \item $\Delta \omega_P$ wird so automatisch kleiner, d.h. feinere Frequenzabtastung.
+   \item Echt periodische Signale werden dadurch evtl. verfälscht: \\ \includegraphics[height =5cm]{Pictures/ZeroPadding.png} 
+ \end{itemize}
+
+ \noindent  \\ \textbf{Gewichtetes Fenstern}
+\\ Um dem Leakage-Effekt mit nur geringen Nebenwirkungen zu reduzieren, werden Gewichtsfunktionen auf das Zeitsignal angewandt, eine sog. gewichtete Fensterung.\\
+
+ \noindent Dies wird dadurch erreicht, dass man das Originalsignal mit einer Gewichtsfunktion mutlipliziert, 
+ bei der am Intervallrand (bei $0$ und $N-1$) die Zeitwerte zur Null gedrückt werden und andererseits kaum neue künstliche Frequenzen eingeführt werden, 
+ d.h. die Gewichtsfunktion dazwischen einen möglichst gleichmässigen Verlauf hat in dem das Originalsignal sinnvoll repräsentiert wird: 
+ $$x' [n] := w[n] \cdot x[n],\ for n = {0,..nN-1},$$ mit der Gewichtsfunktion $w[n]$.\\
+
+\noindent Hanning-Window:
+$$w[n] := 0.5 - 0.5 \cos\bigg(\frac{2\pi n}{N}\bigg)$$
+ Blackman-Window:
+$$w[n] := 0.42 - 0.5 \cos\bigg(\frac{2\pi n}{N}\bigg) + 0.08 \cos\bigg(\frac{4\pi n}{N}\bigg)$$ 
+
+ \noindent Beispiel: \\
+ \includegraphics[height=10cm]{Pictures/WeightedWindow.png}
+
+ \subsubsection{Einschub: Die diskrete Faltung}
+  \label{sec:sub:sub:diskrete-faltung}
+
+  \noindent \textbf{Azyklische diskrete Faltung:}
+  \begin{equation}
+    \label{eq:22}
+      \begin{split}
+      y[n] := x_1[n] * x_2[n] &= \sum_{k=-\infty}^{\infty} x_1[k] \cdot x_2[n-k] \\
+      &= \sum_{k=-\infty}^{\infty} x_1 [n-k] \cdot x_2[k]
+      \end{split}
+    \end{equation}
+
+    \noindent \textbf{Zyklische diskrete Faltung:}
+  \begin{equation}
+    \label{eq:23}
+      \begin{split}
+      y[n] := x_P[n] * h[n] &= \sum_{k=0}^{N-1} x_p[n-k] \cdot h_p[k] \\
+      \end{split}
+    \end{equation}
+    Im Normalfalll wählt man die Funktionen $h[n]$ mit $h[n] = 0$ ausserhalb des Grundintervalls $[0, N-1]$, sodass die Periodisierung mit $h_p[n]$ einfach nur eine Wiederholung der Werte des Grundintervalls darstellt und $h_p[k]$ einfach mit $h[k]$ ersetzt werden kann. \\
+
+    \noindent  \textbf{Bemerkungen:}
+    \begin{itemize}
+      \item Mit der Einführung des diskreten Delta-Impulses $$ \delta [n] =  \begin{cases} 1 &, n = 0 \\ 0 &, n \neq 0 \end{cases} $$
+      gibt es analog zu der Faltung mit analogen Signalen die Neutralitätseigenschaft der Faltung: $$ x[n] * \delta [n-n_0] = x[n - n_0]$$
+      \item Wenn man mit der DFT arbeitet (und somit mit diskreten und periodischen Signalen) nimmt man die Periodisierung des Zeitsignals $x[n]$ in Kauf, um ein diskretes Spektrum $X[n]$ z uerhalten, 
+      jedoch schränkt man sich in der Betrachtung naturgemäss nur auf das Grundintervall $[0, N-1]$ ein und ignoriert die Periodizität 
+      von $x[n]$ ausserhalb dieses Grundintervalls. \\
+      Bei der diskreten Faltung eines solchen Signals kann jedoch sehr einfach ein Überpsrechen von benachbarten Perioden stattfinden, 
+      welches unerwünscht ist aber mit $zero-padding$ vermieden werden kann: \\ \includegraphics[height = 8cm, width = 15cm]{Pictures/DiskreteFaltung.png}
+    \end{itemize}
+
+    \noindent  Herleitung: \\
+    \noindent \underline{Azyklische diskrete Faltung $\to$ Zyklische diskrete Faltung} \\
+    \noindent Für die digitale Verarbeitung stört das $\infty$ in der Summe der Azyklischen diskreten Faltung. Sind die zu verarbeitenden Signale aber diskret und periodisch so ist möglich: \\
+
+    \noindent Betrachtet man das diskrete und periodische Signal $x_p[n]$ mit Periodendauer $N$, sowie ein allgemeines (nicht-periodisches) Signal $h[n]$. 
+    Für diesen Fall gilt mit der Definition der diskreten Faltung und der Aufteilung der Faltungssumme in Teilsummen: 
+    \begin{equation}
+      \label{eq:24}
+        \begin{split}
+        y[n] &:= x_P[n] * h[n] \\
+        y[n] &= \sum_{k=-\infty}^{\infty} x_P[n-k] \cdot h[k] \\
+        y[n] &= ... \sum_{k=-N}^{-1} x_P[n-k] \cdot h[k] +\\
+        &+ \sum_{k=0}^{N-1} x_P[n-k] \cdot h[k] + ...\\
+        \end{split}
+      \end{equation}
+      \noindent Bringt man die Summen über Indexverschiebung zu den gleichen Summengrenzen:
+      \begin{equation}
+        \label{eq:25}
+          \begin{split}
+          y[n] &= ... \sum_{k=0}^{N-1} x_P[n-k + N] \cdot h[k - N] + \\
+          &  +  \sum_{k=0}^{N-1} x_P[n-k] \cdot h[k] + ...\\
+          y[n] &= \sum_{k=0}^{N-1} \sum_{l = -\infty}^{\infty} x_p [n -k -l \cdot N] \cdot h[k + l\cdot N]
+          \end{split}
+        \end{equation}
+\noindent Einerseits gilt wegen der Periodizität $x_p[n-k -l\cdot N] = x_p[n-k]$ und somit
+$$y[n] = \sum_{k=0}^{N-1} x_p[n-k]\cdot \sum_{l=-\infty}^{\infty} h[k + l\cdot N]$$
+und andererseits, stellt 
+$$h_p [k] := \sum_{l=-\infty}^{\infty} h[k + l\cdot N]$$
+eine periodisierte Version von $h[k]$ dar mit $h_p[k + v\cdot N] = h_p[k]$ für alle $v \in \mathbb{Z}$.
+
+\noindent Mit dieser Definition ergibt sich die Faltung zu einer endlichen Summe bzw. zur zyklischen diskreten Faltung (verweis auf \ref{eq:23}).
+
+\subsubsection{Besonderheiten der DFT}
+  \label{sec:sub:sub:besonderheiten-dft}
+
+  \noindent \textbf{Eigenschaften der CTFT:}\\
+  \includegraphics[height = 8cm]{Pictures/EigenschaftenDFT.png}\\
+  \includegraphics[height = 4.5cm]{Pictures/EigenschaftenDFT2.png}\\
+
+  \newpage    
+  
+  \section{Systemtheorie}
+
+
+  \subsection{Klassifizierung von Systemen}
+  \label{sec:sub:klassifizierung-von-systemen}
+
+  \noindent Systeme transformieren Eingangssignale in Ausgangssignale. Die abstrakte mathematische Beschreibung dieses Vorgangs wird in der Systemtheorie behandelt. \\
+  Im Zentrum dieser Vorlesung stehen dabei sog. lineare und zeitinvariante Systeme. \\
+  \includegraphics[height=4cm]{Pictures/Systeme.png}
+
+   \noindent Formal wir der Übergang von einem Eingangssignal $x(t)$ zu einem Ausgangssignal $y(t)$ mit $$ x(t) \to y(t)$$ beschrieben, wobei in dem Pfeil $\to$ die gesamte Syste,information enthalten ist, wie man von $x(t)$ zu $y(t)$ gelangt. \\
+
+   \subsubsection{Linearität}
+   \label{sec:sub:sub:linearitaet}
+    Man nennt ein System linear wenn
+    \begin{itemize}
+      \item Additionsprinzip: Die Summe von zwei beliebigen Eingangssignalen $x_1(t) + x_2(t)$ zu der Summe der jeweiligen Ausgangssignale $y_1(t) + y_2(t)$ führt, d.h. 
+            $$x_1(t) \to y_1(t)\ und\ x_2(t)\to y_2(t) \Rightarrow x_1(t) + x_2(t) \to y_1(t) + y_2(t)$$ 
+      \item Verstärkungsprinzip: Die Verstärkung des Eingangssignal $kx(t)$ mit einem beliebigen reellen Verstärkungsfaktor $ k \in \mathbb{R}$ zu einer identischen Verstärkung des Ausgangssignals $y(t)$ führt, d.h.
+          $$ x(t) \to y(t) \Rightarrow k\cdot x(t) \to k\cdot y(t)$$ 
+    \end{itemize}
+\noindent Beispiele von linearen Systemen: $$ y(t) := \int x(t)\ dt \ und \ y(t) := \frac{d}{dt}x(t)$$
+\noindent Es gibt ebenfalls echt nichtlineare Systeme: $$y(t) := \big(x(t)\big)^2$$
+
+
+    \subsubsection{Zeitinvarianz}
+    \label{sec:sub:sub:zeitinvarianz}
+    Man nennt ein System zeitinvariant wenn 
+    \begin{itemize}
+      \item das Signal sich mit der Zeit selbst nicht ändert, d.h. für ein beliebiges zeitverschobenes Eingangssignaö $x(t-\tau)$ gilt, dass das Ausgangssignal genauso verschoben ist, d.h. 
+        $$ x(t) \to y(t) \Rightarrow x(t-\ tau) \to y(t - \tau)$$
+        \includegraphics[height=3cm]{Pictures/Zeitinvarianz.png}
+    \end{itemize}
+    \noindent Es gibt ebenfalls zeitvariante Systeme: $$y(t) := t\cdot x(t)$$
+
+    \subsubsection{Kausalität}
+    \label{sec:sub:sub:kausalitaet}
+    Man nennt ein System kausal wenn 
+    \begin{itemize}
+      \item für ein Eingangssignal $x(t)$, für das gilt x$(t) = 0$ für $t<0$ 
+      \item ein Ausgangssignal y(t) erhält, für das ebenso gilt, dass $y(t) = $ für $ t<0$. 
+    \end{itemize}
+    \noindent    In anderen Worten: Das System erzeugt frühestens ein Ausgangssignal wenn es auch ein Eingangssignal erhalten hat. \\
+
+    \subsubsection{BIBO-Stabilität}
+    \label{sec:sub:sub:bibo-stabilitaet}
+    Man nennt ein System BIBO-stabil wenn 
+    \begin{itemize}
+      \item ein beschränktes Eingangssignal $x(t)$ zu einem beschränkten Ausgangssignal führt, d.h. für $A, B \in \mathbb{R}$ gilt 
+          $$|x(t)| \leq A < \infty \Rightarrow |y(t)| \leq B < \infty$$
+          Das bedeutet insbesondere, dass das System das Eingangssignal nicht beliebig stark verändern kann.
+    \end{itemize}
+
+    \subsubsection{Erhaltung von Frequenzen beim Durchlaufen von LTI-Systemen}
+    \label{sec:sub:sub:erhalt-der-frequenzen}
+    \noindent Der wesentliche Aspekt ist: Was passiert mit den Frequenzen der Eingangssignalen beim Durchlaufen von Systemen? \\ 
+
+    \noindent Nur in ein LTI-System eingehende Frequenzen eines Eingangssignals können auch Teil des Ausgangssignals sein. \\
+    Insebsondere kann ein LTI-System keine neuen Frequenzen erzeugen, die nicht schon Teil des Eingangssignals waren.\\
+
+    \noindent Natürlich werden die Frequenzen des Eingangssignals typischerweise durch den Systemdurchlauf im Ausgangssignal anders gewichtet sein. \\
+
+    \noindent Beweis: \\
+    \includegraphics[height=8cm]{Pictures/Beweis.png} \\
+    \includegraphics[height=6cm]{Pictures/Beweis2.png}
+
+    \subsubsection{Beispielsysteme: Grundarten von Filtern}
+    \label{sec:sub:sub:grundarten-filter}
+    Filter sind Systeme, die die Gewichtung von Frequenzen in Eingangssignalen bewusst verändern, um modifizierte Ausgangssignale zu erzeugen. \\
+
+    \noindent Es gibt vier Grundarten zur Manipulation der Frequenzen:\\
+    \includegraphics[height=7cm,width=13cm]{Pictures/Filter.png} \\
+    \noindent Genau solch dargestellte ideale Filterarten können praktisch nicht direkt realisiert werden, sondern werden nur angenähert.
+    \begin{itemize}
+      \item Die Hoch- und Null-Plateaus der Filter können nicht exakt konstant gehalten werden. 
+      \item Die exakten Sprungstellen in den Frequenzen würden zu unendlichen ausgebreiteten Signalen im Zeitraum 
+      (d.h. in positive und negative Zeitrichtung) führen, 
+      was in kausalen (also realisierbaren) Systemen nicht möglich ist \\
+      (Fourierkorrespondenz sinc-Funktion - Reckteckpuls)\\
+    \end{itemize}
+
+    \noindent \textbf{Tiefpassfilter:}\\
+    Entfernen von hochfrequentem Rauschen von einem empfangenen Signal, oder um ein Eingangssignal vor einer Abtastung bandbegrenzt zu machen.\\
+    \noindent \textbf{Hochpassfilter:}\\ 
+    Kantenfindung in Signal, oder in Equalizern in der Musik zur Schwächung niedriger Frequenzen.\\
+    \noindent \textbf{Bandpassfilter:}\\
+    Zur Selektion gewisser Frequenzbänder, bspw. zur Auftrennung in verschiedene Frequenzkanäle in der Akustuk (bspw. FM-Radio) oder Farbfilter in der Optik. \\
+    \noindent \textbf{Bandsperre:}\\
+    Abschwächung von Mittenfrequenzen bei einem Equalizer in der Akustik. 
+
+    \subsection{Impuls- und Schrittantwort}
+    \label{sec:sub:impuls-und-schrittantwort}
+
+    \subsubsection{Impulsantwort}
+    \label{sec:sub:sub:impulsantwort}
+
+    Wir definieren eine Funktion, nähmlich die Impulsantwort $h(t)$, welche das Ausgangssignal eines LTI-Systems ist, wenn man einen Delta-Impuls $x(t) := \delta(t)$ als Eingangssignal wählt. Man schreibt: 
+    $$\delta(t) \to h(t)$$
+
+    \noindent Es gilt:
+    \begin{itemize}
+    \item Aufgrund des Verstärkungsprinzip von linearen Systemen: \begin{equation}\label{eq:26} x(t) \cdot \delta(t) = x(0) \cdot \delta(t) \to x(0) \cdot h(t) \end{equation} 
+    \item Nach dem Verschiebungssatz des Delta-Impulses und der Zeitinvarianz des Systems: \begin{equation}\label{eq:27} x(\tau) \cdot \delta(t-\tau) \to x(\tau) \cdot h(t-\tau) \end{equation}
+    \item Integriert man dieses Signal nun (die Integration is eine lineare Operation) ergibt sich: $$\int_{-\infty}^{\infty} x(\tau) \cdot \delta(t-\tau)\ d\tau\ \to\ \int_{-\infty}^{\infty} x(\tau) \cdot h(t-\tau)\ d\tau$$
+    Es folgt: \begin{equation}\label{eq:28} x(t) \to x(t) * h(t) =: y(t)\end{equation} 
+    1. Egal welches $x(t)$ eingesetz wird, kennt man die Impulsantwort $h(t)$.\\
+    2. Das Ausgangssignal $y(t)$ kann man berechnen, indem man das Eingangssignal $x(t)$ mit der Impulsantwort $h(t)$ faltet.\\
+    3. Ist die Impulsantwort bekannt, kann man für jedes beliebige Eingangssignal $x(t)$ das Ausgangssignal $y(t)$ berechnen.\\
+    \end{itemize}
+
+    \noindent \textbf{Verbindung mit kausalen Systemen:} \\
+    \noindent Ein kausales LTI-System hat eine Impulsantwort für die gilt $h(t) = 0$ für $t <0$. \\
+
+    \noindent \textbf{Verbindung mit stabilen Systemen:} \\
+    \noindent Durch die Berechenbarkeit von Ausgangssignalen bei LTI-Systemen, kann die BIBO-Stabilität für diesen Fall konkretisiert werden. 
+    Es muss gelten, dass für ein beschränktes Eingangssignal $|x(t)| \leq A$ ein beschränktes Ausgangssignal $|y(t)| \leq B$ erhalten wird. 
+    Unter Verwendung der Dreiecksungleichung für Integrale gilt:
+    \begin{equation}\label{eq:29}|y(t)| = | x(t) * h(t)| = \bigg| \int_{-\infty}^{\infty}x(\tau)\cdot h(t- \tau)\ d \tau \bigg| \leq \int_{-\infty}^{\infty}|x(\tau)|\cdot |h(t- \tau)| \ d \tau \end{equation}
+    Setzt man nun den konstanten Maximalwert $A$ für $|x(t)|$ ein, so ergibt sich daraus
+    $$|y(t)| \leq A \cdot \int_{-\infty}^{\infty} |h(t-\tau)|\ d\tau$$
+    was ja kleiner als $\infty$ sein muss und damit:\\
+
+    Ein BIBO-stabiles LTI-System hat eine Impulsantwort für die gilt:
+    \begin{equation}
+      \label{eq:30}
+      \int_{-\infty}^{\infty} |h(t)|\ dt < \infty
+    \end{equation}
+    \indent d.h. das Integral über den Absolutbetrag der Impulantwort hat einen endlichen Wert.
+
+    \subsubsection{Schrittantwort}
+    \label{sec:sub:sub:schrittantwort}
+
+    \noindent    Der Delta-Impuls ist nur mühsam anzunähern. Es stellt sich heraus, dass die enge Verbindung der Sprung- bzw. Heavyside-Funktion $\varepsilon(t)$ mit dem Delta-Impuls $\delta(t)$ hier enorme praktische Vorteile.
+    Mit
+    $$ \frac{d}{dt}\varepsilon(t) = \delta (t)\ \ bzw.\ \ \varepsilon(t) = \int_{\infty}^{t} \delta(\tau)\ d\tau$$
+    Da wir kausale LTI-Systeme betrachten (und somit das Additionsprinzip mit der Integration gültig ist) und wir die Werte für $t<0$ vernachlässigen können, erhalten wir daraus
+    \begin{equation}\label{eq:31} \varepsilon(t) \to g(t) := \int_{0}^{t}h(\tau)\ d\tau\end{equation}
+    mit der Impulsantwort $h(t)$ und der sog. Schrittantwort $g(t)$.
+
+  \subsection{Analoge LTI-Systeme}
+  \label{sec:sub:analoge-lti-systeme}
+  Typische Beispiele sind elektronische Schaltungen als analoge (d.h. zeitkontinuierliche) LTI-Systeme, 
+  welche aus in Reihe oder parallel geschalteten passiven Bauelementen, wie Widerständen, Spulen und Kondensatoren aufgebaut sind. \\
+
+  \subsubsection{Grundregeln analoger LTI-Systeme}
+  \label{sec:sub:sub:grundregeln-analoger-lti-systeme}
+  \noindent Es gelten für diese elementaren Bauteile folgende bekanten Grundregeln zwischen Stromfluss $i(t)$ und Spannungsabfall $u(t)$:
+  \begin{itemize}
+    \item Ohm'sches Gesetz - Widerstand $R$ $$ u(t) = R\cdot i(t)$$
+    \item Kondensator mit Kapazität $C$ $$u(t) = \frac{1}{C}\int_{-\infty}^{t} i(\tau)\ d\tau$$
+    \item Spule mit Induktivität $L$ $$u(t) = L\frac{d}{dt}i(t)$$
+  \end{itemize}
+
+  \noindent sowie die Grundregeln der Verknüpfung dieser Bauelemente in Schaltungen mit Hilfe der Kirchoff'schen Regeln:
+  \begin{itemize}
+    \item Knotenregel für alle $n$ Ströme die durch einen Knoten fliessen $$ \sum_{k=1}^{n}i_k(t) = 0$$ 
+    \item Maschenregel für alle $n$ Spannungsabfälle in einer Masche  $$ \sum_{k=1}^{n}u_k(t) = 0$$
+  \end{itemize}
+  \noindent  Beispiel Maschenregel (Grün):\\
+  \includegraphics[height=5cm]{Pictures/PhysikRegeln.png}
+
+  \subsubsection{Darstellung analoger elektronischer Schaltungen als Differentialgleichungen}
+  \label{sec:sub:sub:elek-schaltungen-diff}
+
+  Im Folgenden betrachten wir detailliert das obige Beispiel. Aus der linken und rechten Masche ergeben sich nach der Maschenregel:
+  $$ u_E(t) - u_C(t)-u_R(t) = 0 $$
+  $$ u_A(t)-u_C(t) = 0$$
+
+  \noindent Löst man nach $u_E(t)$ bzw. nach $u_A(t)$ auf und setzt die bekannte Gleichung für die Spannung ein, so ergibt sich
+  $$ u_E(t) = \frac{1}{C} \int_{-\infty}^{t} i(\tau)\ d\tau + Ri(t)$$
+  $$ u_A(t) = \frac{1}{C} \int_{-\infty}^{t} i(\tau)\ d\tau$$
+
+  \noindent Da uns der Zusammenhang zwischen Eingangsspannung $u_E(t)$  und Ausgangsspannung $u_A(t)$ interessiert, müssen wir $i(t)$ ersetzen mit Hilfe der Umformung der letzten Gleichungen zu 
+  $$ i(t) = C\frac{d}{dt}u_A(t)$$
+  ergibt sich die Differentialgleichung
+  $$ u_E(t) = u_A(t) + RC\frac{d}{dt}u_A(t)$$
+  und in der bisherigen Notation
+  $$ y(t) + RC\frac{d}{dt}y(t) = x(t)$$
+  oder auch
+  $$ y(t) + RC\dot{y}(t) = x(t)$$ 
+
+  \noindent \\ Im Allgemeinen ergeben sich für solche elektronsichen Schaltungen (egal wie komplex) immer folgende Form von linearen Differentialgleichungen
+  \begin{equation}
+    \label{eq:32}
+     a_0y(t) + a_1\dot{y}(t) + a_2 \ddot{y}(t)+  ... =  b_0x(t) + b_1\dot{x}(t) + b_2 \ddot{x}(t)+...
+  \end{equation}
+  mit konstanten $a_k, b_k \in \mathbb{R}$. Das Lösen dieser Gleichung erfolgt mit der Laplace-Transformation. \\
+
+  \noindent Es gilt:\\
+  Systeme die durch den Zusammenhang zwischen Eingangssignal und Ausgangssignal mit Hilfe linearer Differentialgleichungen mit konstanten Koeffizietnen beschrieben werden können, sind automatisch LTI-Systeme.
+
+  \subsubsection{Laplace-Transformation}
+  \label{sec:sub:sub:laplace}
+
+  LT = Laplace-Transformation. Bisher haben wir die Fouriertransformation in drei versch. 
+  Fromen kennengelernt, CTFT für analoge Signale, DTFT für abgetastete Signale und DFT/FFT für abgetastete, periodische Signale. \\
+
+  \noindent Für die Untersuchung von analogen Systemen, wird eine echte Erweiterung der CTFT eingeführt, die sog. Laplace-Transformation:
+  \begin{equation}
+    \label{eq:33}
+    X_{LT}(s) := \int_{0^-}^{\infty} x(t) e^{-st}\ dt\ \ (LT)
+  \end{equation}
+  für echt komplexe Zahlen $s \in \mathbb{C}$ und wird auch die einseitige Laplace-Transformation genannt. \\
+
+  \noindent \textbf{Bemerkungen:}
+  \begin{itemize}
+    \item Man erhält für jede komplexe Zahl $s \in \mathbb{C}$ aus der komplexen Zahlenebene einen komplexen Wert $X_{LT}(s)$. Das tiefgestellte $LT$ soll hierbei den Unterschied zwischen Fouriertransformation und Laplace-Transformation verdeutlichen.
+    \item Man schreibt ebenso wie bei der Fouriertransformation $x(t) \TransformHoriz X_{LT}(s)$, und spricht davon, dass $x(t)$ im Zeitbereich und $X_{LT}(s) $ im Bildbereich liegt.
+    \item $0^-$ steht für die kleinstmögliche negative Zahl. Da wir kausale Systeme betrachten, kann das Integral nicht bei $-\infty$ beginnen. 
+    \item Zusammenhang zur Fouriertransformation: \\ \includegraphics[height=5cm]{Pictures/ZusammenhangLT.png}
+  \end{itemize} 
+
+  \noindent Anschauliches Bild der Laplace-Transformation: \\
+  \includegraphics[height=5cm]{Pictures/LT.png}
+  \includegraphics[height=7cm]{Pictures/LT2.png}
+
+  \subsubsection{Besonderheiten der Laplace-Transformation}
+  \label{sec:sub:sub:besonderheiten-laplace}
+
+  \noindent \textbf{Eigenschaften der Laplace-Transformation:}\\
+  \noindent Aufgrund der Nähe zur CTFT, hat die Laplace-Transformation sehr ähnliche Eigenschaften wie die CTFT (man muss meinst nur $j\omega$ mit $s$ ersetzen).\\
+  \includegraphics[height=8cm]{Pictures/EigenschaftLT.png}\\
+  \includegraphics[height=9cm]{Pictures/EigenschaftLT2.png} \\
+
+  \noindent \textbf{Korrespondenzen der Laplace-Transformation:} \\
+  \includegraphics[height = 9cm]{Pictures/KorrespondenzLT.png}\\
+  \includegraphics[height = 8cm]{Pictures/KorrespondenzLT2.png}
+
+  \subsubsection{Übertragungsfunktion und Frequenzgang}
+  \label{sec:sub:sub:uebertragungsfunktion-und-frequenzgang}
+
+  \noindent Mit Hilfe von Laplace-Transformation, Linearität, Differentiation und Faltung, kann man die lineare Differentialgleichung mit konstanten Koeffizienten sehr einfach transformieren. 
+  Es sei ein System wie folgt beschrieben:
+  $$ a_0 y(t) + a_1\dot{y}(t) + a_2\ddot{y}(t)+... = b_0 x(t) + b_1\dot{x}(t) + b_2\ddot{x}(t)+...$$
+  mit konstanten Koeffizienten $a_k, b_k \in \mathbb{R}$ und dem Eingangssignal $x(t)$ und dem Ausgangssignal $y(t)$ (für das gilt: $y(t) = 0$ für $t<0$) \\
+  Mit Anwendung der Laplace-Transformation auf beiden Seiten und der Differentiationseigenschaft $\big(x(0^-) = 0$ und $y(0^-) = 0\big)$ ergibt sich:
+  $$ a_0\cdot Y_{LT}(s) + a_1\cdot sY_{LT}(s) + a_2 \cdot s^2 Y_{LT}(s) + ... = b_0\cdot X_{LT}(s) + b_1\cdot sX_{LT}(s) + b_2\cdot s^2 X_{LT}(s) + ...$$
+  Durch Ausklammern und Umformen erhalten wir:
+  \begin{equation}
+    \label{eq:34}
+    Y_{LT}(s) = X_{LT}(s) \cdot \frac{b_0 + b_1\cdot s + b_s\cdot s^2 + ...}{a_0 + a_1\cdot s + a_2 \cdot s^2 + ...}
+  \end{equation}
+
+  \noindent Wobei der Bruch als Übertragungsfunktion $H_{LT}$ eines kontinuierlichen Systems definiert wird:
+  \begin{equation}
+    \label{eq:35}
+    H_{LT} := \frac{b_0 + b_1\cdot s + b_s\cdot s^2 + ...}{a_0 + a_1\cdot s + a_2 \cdot s^2 + ...}
+  \end{equation}
+  \noindent Die Übertragunsfunktion $H_{LT}$ enthält alle Informationen der zu Grunde liegenden Differentialgleichung und damit alle Information des Systems.\\
+
+  \noindent \textbf{Bemerkungen:}
+  \begin{itemize}
+    \item Der gesamte Informationsgehalt des Systems ist unabhängig vom Eingangssignal $x(t)$ in $H_{LT}$ komprimiert.
+    \item Man kann Ausgangssignal $y(t)$ theoretisch errechnen, wenn amn $X_{LT}(s) \cdot H_{LT}(s)$ berechnet und unter Zuhilfename der Korrespondenztabelle bzw. der Eigenschaften der Laplace-Transformation die zugehörige Zeitfunktion bestimmt.
+  \end{itemize} 
+
+  \noindent Darüber hinaus ist uns die Faltungseigenschaft der Laplace-Transformation bekannt mit:
+  $$ y(t) = x(t) * h(t) \TransformHoriz Y_{LT}(s) = X_{LT}(s) \cdot H_{LT}(s)$$
+  und somit erkennt man im Verlgeich zur Definition der Impulsantwort:
+
+  \begin{equation}
+    \label{eq:36}
+   \delta (t) \to h(t) \TransformHoriz H_{LT}(s)
+  \end{equation}
+  Die Laplace-Transformierte der Impulsantwort $h(t)$ eines LTI-Systems, ist genau die Übertragungsfuntion $H_{LT}(s)$. \\
+
+  \noindent \textbf{Frequenzgang:} \\
+  \noindent  Darüber hinaus ist bekannt, dass die Laplace-Transformierte $X_{LT}(s)$ für Eingangssignale $x(t)$, mit $x(t) = 0$ für $t <0$, identisch ist mid det Fouriertransformierten $X(\omega)$, wenn man sich mit $s$ auf $s=j\omega$ einschränkt, d.h.
+  $$X(\omega) = X_{LT}(j\omega)$$
+
+  \noindent Dies bedeutet (insofern natürlich all diese Transformierten exisiteren,), für solche Signale ist die Fouriertransformierte $H(\omega)$ der Impulsantwort $h(t)$ nichts anderes als die Einschränkung der Übertragungsfunktion $H_{LT}(s)$ auf den Streifen $s = j\omega$:
+  \begin{equation}
+    \label{eq:37}
+    h(t) \TransformHoriz H(\omega) = H_{LT}(j\omega)
+  \end{equation}
+
+  \noindent Es ergibt sich: \\
+  Wir nennen die Fouriertransformierte $H(\omega)$ der Impulsantwort $h(t)$ den sog. Frequenzgang des Systems. Dieser ist identisch mit der Übertragungsfunktion $H_{LT}(s)$ eingeschränkt auf den Streifen $s ) j\omega$. \\
+  Wir nenen $|H(\omega)|$ den Amplitudengang und $arg\big(H(\omega)\big)$ den Phasengang des Systems. \\
+
+  \noindent  \textbf{Der Frequenzgang ist wichtig weil:}
+  \begin{itemize}
+    \item Es ist wichtig inder Systemtheorie zu wissen, was mit dem Eingangssignal $x(t)$ beim Durchlaufen des Systems hin zum Ausgangssignal $y(t)$ passiert.
+    \item Man kann die Effekte des Systems gut durch die Auswirkung auf die Frequenzen des Eingangssignal charakterisieren, so dass bspw. die Frequenzen des Eingangssignal verstärkt oder gedämpft werden.
+    \item Der Amplitudengang beschreibt genau, wie die Frequenzen eiens Eingangssignals durch das System gewichtet werden, und 
+    \item der Phasengang enthält Informationen über die zeitliche Verschiebung der Frequenzanteile des Eingangssignals.
+  \end{itemize}
+
+  \noindent \textbf{Die Übertragungsfunktion ist wichtig weil:}
+  \begin{itemize}
+    \item Sie ist die direkte Berechnung der Laplace-Transformierten der Impulsantwort, die sich oftmlas als wesentlich einfacher zu berechnen ist als die direkte Berechnung der Fouriertransformierten.
+    \item Systeme lassen sich meist sehr gut durch die Lage der Pole und Nullstellen der Übertragungsfunktion in der komplexen Zahlenebene vergleichenn. 
+  \end{itemize}
+
+  \noindent \textbf{Beispiel RC-Glied (Variante 1):}\\
+  \includegraphics[height=7cm]{Pictures/BeispielVariante1.png} \\
+  \includegraphics[height=7cm]{Pictures/BeispielVariante12.png} \\
+
+  \noindent \textbf{Veranschaulichung der Schaltungen (Variante 1 und 2):}\\
+  \includegraphics[height=6cm]{Pictures/Variante1und2.png} \\
+  \includegraphics[height=8cm]{Pictures/Variante1und22.png} \\
+
+  \noindent \textbf{Handlungsanweisung zur Bestimmung von Amplituden- und Phasengang:}\\
+  Bestimme
+  \begin{itemize}
+    \item die Differentialgleichung
+    \item daraus die Übertragungsfunktion $H_{LT}(s)$
+    \item daraus den Frequenzgang $H(\omega) = H_{LT}(j\omega)$ (am Besten schon in Real und Imaginärteil aufgetrennt)
+    \item daraus den Amplituden gang $|H(\omega)|$ bzw. den Phasengang $arg\big(H(\omega)\big)$
+  \end{itemize}
+
+  \subsubsection{Schrittantwort im Bildbereich}
+  \label{sec:sub:sub:schrittantwort-bildbereich}
+  Es ist messtechnisch einfacerh die Schrittantwort zu bestimmen,
+   weshalb auch nochmal der Zusammenhang zwischen Übertragungsfunktion 
+   und der Laplace-Transformation der Schrittantwort betrachtet wird mit:
+   \begin{equation}
+    \label{eq:38}
+    \varepsilon (t) \to g(t) = \int_{0}^{t}h(\tau)\ d\tau \TransformHoriz G_{LT}(s) = \frac{1}{s}H_{LT}(s)
+  \end{equation}
+
+  \noindent Man kann bspw. auch den stationären Endwert für $t \to \infty$ nach der Aufladung aller Speicherelemente des Systems mit Hilfe des Endwertsatzes bestimmen, da
+  $$ \lim_{t\to\infty}g(t) = \lim_{s\to 0} s \cdot G_{LT}(s) = \lim_{s \to 0} H_{LT}(s)$$
+
+  \noindent \textbf{Beispiel RC-Glied (Variante 1):}\\
+  \includegraphics[height=7cm]{Pictures/Bsp1.png} 
+
+  \subsubsection{Typische Darstellungsformen von Systemen}
+  \label{sec:sub:sub:darstellungsformen-systeme}
+
+  \noindent \textbf{PN-Diagramme}\\
+  \noindent Offensichtlich enthält die Übertragungsfunktion alle Eigenschaften des betrachteten Systems.
+  \begin{itemize}
+  \item Reale Systeme in der LTI-Näherung (ohne Übersteuerung) führen zu linearen Differentialgleichungen mit konstanten Koeffizienten, welche als Übertragungsfunktion immer gebrochen-rationale Funktionen sind, d.h. ein Bruch bestehend aus Polynom im Nenner und Polynom im Zähler.
+  \item Nicht wunderlich ist also, dass die Lage der Nullstellen im Nenner, sog. Pole der Übertragungsfunktion und die Nullstellen im Zähler, sog. Nullstellen der Übertragungsfunktion eine tiefgreifende Bedeutung für die Beschreibung solcher Systeme haben.
+  \item Aus diesem Grund stellt man die lage der Pole und Nullstellen in der komplexen Zahlenebene in sog. PN-Diagrammen dar, worin die Pole als Kreuze und die Nullstellen als Kreise dargstellet werden.
+  \item \textbf{Ein System ist stabil, wenn der Polynomgrad des Zählers kleiner gleich des Polynomgrades des Nenners ist und alle Pole in der linken Halbebene liegen. }
+  \end{itemize}
+
+  \noindent \textbf{Beispiel RC-Glied:}\\
+  \includegraphics[height=6cm]{Pictures/PN.png} \\
+
+  \noindent \textbf{Bode-Diagramme}\\
+ \noindent  Ebenso sehr üblich ist die Darstellung des Amplituden- und Phasengangs in der sog. Bode-Darstellung. Dabei werden die (mathematisch nur positiven) Frequenzen $f$ dargestellt mit $f = \frac{\omega}{2\pi}$ und diese auf einer logarithmischen Achse angetragen. Über diesen Frequenzen wird einerseits der Amplitudengang ebenso logarithmisch bzw, der Phasengang normal (d.h. linear) angetragen. \\
+
+  \noindent \textbf{Beispiel RC-Glied:}\\
+  \includegraphics[height=9cm]{Pictures/Bode.png} \\
+
+  \subsection{Diskrete LTI-Systeme}
+  \label{sec:sub:diskrete-lti-systeme}
+
+  \subsubsection{Schema digitaler Systeme für die Bearbeitung von analogen Signalen}
+  \label{sec:sub:sub:schema-digital-bearbeitung-analog}
+  
+  \noindent Diskrete LTI-System, und insbesondere digitale LTI-Systeme (alle Parameterwerte dieser Systeme liegen in diskreten Schrittweiten vor), werden meist als stabile und flexible Alternative zu analogen LTI-Systemen zur Bearbeitung von kontinuierlichen Signalen verwendet. \\
+
+  \noindent \textbf{Ablauf :} \\
+  \includegraphics[height=4cm]{Pictures/Pipeline.png}
+  \begin{itemize}
+    \item \textbf{TP}: Anti-Aliasing.Filter, hat die Aufgabe das kontinuierliche Eingangssignal $x(t)$ künstlich auf Bandbreite $B$ zu begrenzen, sodass bei der Diskretisierung des Signals das Abtasttheorem automatische erfüllt ist.
+    \item \textbf{S H}: Sample-And-Hold-Schaltung, hat die Aufgabe zeitdiskretisierung vorzubereiten, sodass das Signal zu Beginn des Abtastzeitintervalls mit Breite $\Delta T_A < \frac{1}{2\cdot B}$ einmal abgetastet wird und über das ganze Intervall konstant gehalten wird.
+    \item \textbf{A/D}: Analog-Digital-Wandler, hat die Aufgabe die tatsächliche Abtastung des Signals in der Zeit mit Abtastfrequenz $f = \frac{1}{\Delta T_A}$ dzurchzuführen und quantisiert die erhaltenen Signalwerte.
+    \item \textbf{Digitales System}: Hat die Aufgabe das digitale Eingangssignal $x[n]$ in das digitale Ausgangssignal $y[n]$ zu überführen.
+    \item \textbf{D/A}: Digital-Analog-Wandler, hat die Aufgabe aus dem digitalen Signal $y[n]$ wieder ein zeitkontinuierliches Signal zu erstellen.
+    \item \textbf{TP}: Hat die Aufgabe das Signal dass nach dem D/A-Wandler durch die hohen Sprungstellen extrem hohe Frequenzen enthält zu glätten (praktisch eine Interpolation). 
+  \end{itemize}
+
+  \subsubsection{Darstellung diskreter Systeme als Differentialgleichung}
+  \label{sec:sub:sub:darstellung-diskreter-signale-differentialgleichung}
+
+\noindent  Die mathematische Beschreibung diskreter LTI-Systeme ist ähnlich zu den linearen Differentialgleichungen mit konstanten Koeffizienten bei den analogen LTI-Systemen.
+ Anstatt Differentialgleichungen werden im diskreten Fall Differenzengleichungen verwendet, die folgende grundsätzliche Struktur aufweisen: 
+
+\begin{equation}
+    \label{eq:39}
+    \begin{split}
+    y[n] + a_1 y[n-1] + a_2 y[n-2] + ... &= b_0 x[n] + b_1 x[n-1] + b_2 x[n-2] + ... \\
+    \Leftrightarrow \ y[n] &= \sum_{i=0}^{N}b_i \cdot x[n-i] - \sum_{i = 1}^{M}a_i \cdot y[n-i]
+    \end{split}
+  \end{equation}
+  Es gilt dabei zu beachten, dass der Vorfaktor vor $y[n]$ ohne Einschränkungen der Allgemeinheit auf $a_0 = 1$ gesetzt wurde. \\
+
+  \noindent Wir erkennen, der aktuelle Wert $y[n]$ hängt im Allgemeinen sowohl von den Eingabewerten $x[n]$ als auch von früheren Ausgabewerten ab. Zuerst stellen wir fest, dass in der Definition der Gleichungen nur drei Operationen verwendet werden:
+  \begin{itemize}
+    \item Diskrete Systeme können als Differenzialgleichungen beschrieben werden, die aus nur drei Operationen bestehen.
+    \item Multiplikation mit einer konstnaten: $a_0, x[n] \to a_0 \cdot x[n]$
+    \item Addition: $x[n],x[m] \to x[n] + x[m]$
+    \item Verzögerung: $y[n] \to y[n-k]$ (Verzögerung um k Schritte)
+    \item D.h. Alle diskreten (und digitalen) LTI-Systeme lassen sich mit diesen drei Operationen komplett beschreiben
+  \end{itemize}
+
+  \noindent Des Weiteren wird aus der Definitionsgleichung \ref{eq:39} definiert, dass diskrete Systeme mit der allgemeinen Differenzialgleichung und ..
+  \begin{itemize}
+    \item ... mindestens ein $a_i \neq 0$, als sog. IIR-Systeme (IIR = infinite impuls response) bezeichnet werden, d.h. das System hängt von mindestens einem vergangenen Ausgangswert ab
+    \item ... alle $a_i = 0$, als sog. FIR-System (FIR = finite impuls response) bezeichnet werden, d.h. das System hängt überhaupt nicht von vergangenen Ausgangswerten ab.
+  \end{itemize}
+
+  \noindent \textbf{Blockdiagramm für alle IIR-Systeme:} \\
+  \includegraphics[height=9cm,width=12cm]{Pictures/IIR.png} \\
+
+  \noindent \textbf{Blockdiagramm für alle FIR-Systeme:} \\
+  \includegraphics[height=9cm]{Pictures/FIR.png} \\
+
+  \noindent \textbf{Beispiel diskretisiertes RC-Glied (Variante 1):} \\
+  \includegraphics[height=7cm]{Pictures/BSPdis.png} \\
+  \includegraphics[height=3cm]{Pictures/BSPdis2.png} \\
+
+  \subsubsection{Impulsantwort diskreter Systeme}
+  \label{sec:sub:sub:impulsantwort-diskreter-systeme}
+
+  Die allgemeine Beschreibung der Impulsantwort hat auch ihre Anwendung für diskrete Systeme (man muss sich im Hinterkopf einfach den Delta-Kamm an die kontinuierlichen Signale multipliziert vorstellen). 
+  Dennoch ist die Ensprechung mit dem diskreten Delta-Impuls $\delta[n]$ und der diskreten Sprungfunktion $\varphi[n]$ wichtig:\\
+  \includegraphics[height=3cm]{Pictures/functions.png}  \\
+  Die Impulsantwort $h[n]$ eines diskreten LTI-Systems ist das Ausgangssignal, wenn man einen Delta-Impuls $x[n]:= \delta[n]$ als Eingangssignal wählt. Man schreibt:
+  $$ \delta[n] \to h[n]$$
+  \noindent Im Weiteren gilt ebenso im diskreten Fall, dass 
+  \begin{equation}
+    \label{eq:40}
+    x[n] \to x[n] * h[n]
+  \end{equation}
+  was bedeutet, das Ausgangssignal $y[n]$ eines diskreten LTI-Systems für ein beliebiges Eingangssignal $x[n]$ ist die Faltung des Eingangssignals mit der Impulsantwort, d.h. $y[n] := x[n] * h[n]$. \\
+
+  \noindent Ebenso gilt: Ein diskretes LTI-Sytem ist kausal, falls 
+  $$ h[n] = 0\ for\ n<0$$
+  und es ist BIBO-stabil, wenn
+  $$ \sum_{n=0}^{\infty}|h[n]| < \infty$$
+
+  \noindent \textbf{Impulsantwort für FIR-Systeme:} \\
+  \noindent Insbesondere hat die Impulsantwort von FIR-Systemen eine interessante Eigenschaft da alle Koeffizienten $a_i = 0$:
+  $$ \delta[n] \to h[n] = \sum_{i=0}^{N} b_i \cdot \delta[n-i] = [b_0, b_1, b_2,...,b_N]$$
+  d.h. die Impulsantwort dauert nur endlich lange und hat aussehalb der Zeitpunkte $n = 0,...,N$ immer den Wert Null. Daher auch der Name FIR = Finite Impulse Response. \\
+
+  \noindent  Darüber hinaus besteht die Impulsantwort genau aus den Koeffizienten $b_i$ der Differenzengleichung. Auch erkennt man daher, dass FIR-System deshalb immer stabil sind, da
+  $$ \sum_{n=0}^{\infty}|h[n]| = \sum_{n=0}^{N}|b[n]| < \infty$$
+
+  \noindent \textbf{Bemerkung:}
+  \begin{itemize}
+    \item Die Impulsantwort bei IIR-Systeme (also Systeme mit mindestens einem $a_i \neq 0$ ist nicht so einfach, wie bei den FIR-Systeme. In diesen Systemem können typischerweise Impulsantworten $h[n]$ entstehen, die unendlich lange andauern, daher auch IIR = Infinite Impulse Response) 
+  \end{itemize} 
+
+  \noindent \textbf{Beispiel diskretisiertes RC-Glied (Variante 1):} \\
+  \includegraphics[height=6cm]{Pictures/bsprc.png} \\
+  \includegraphics[height=8cm]{Pictures/bsprc2.png} \\
+\end{document}
